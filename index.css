@@ -1,0 +1,148 @@
+body {
+    background: #000000;
+    margin: 0;
+    padding: 0;
+}
+
+canvas {
+    background: #5cc3dd;
+}
+
+#bearSvg {
+    position: absolute;
+    bottom: -52px;
+    transform: translateX(-95px);
+}
+
+#forearm-group {
+}
+
+#forearm {
+    fill: var(--fur);
+}
+#forearm-flare {
+    fill: var(--fur-light);
+}
+#shoulder-arm {
+    fill: var(--fur);
+    transform: rotate(1deg) translate(95px, 82px);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+* {
+    box-sizing: border-box;
+}
+:root {
+    --jeans: #737373;
+    --ground-hue: 55;
+    --belt: #000;
+    --fur-dark: #73370d;
+    --fur: #8a420f;
+    --fur-light: #b8672e;
+    --muzzle: #e6b999;
+    --tank: #d9d9d9;
+    --nose: #0d0d0d;
+    --bandana: #f20d0d;
+    --keyboard-body: #404040;
+    --keyboard-key: #8c8c8c;
+    --keyboard-accent: #7359a6;
+    --bg: hsl(var(--ground-hue), 20%, 20%);
+}
+/* body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+} */
+svg {
+    width: 250px;
+    height: 350px;
+}
+.ground {
+    --alpha: 0.5;
+    fill: hsla(var(--ground-hue), 60%, 60%, var(--alpha, 1));
+}
+.bear__jeans {
+    fill: var(--jeans);
+}
+.bear__belt {
+    fill: var(--belt);
+}
+.bear__muzzle {
+    fill: var(--muzzle);
+}
+.bear__shoulder--left {
+    fill: var(--fur);
+}
+.bear__tank {
+    fill: var(--tank);
+}
+.bear__nose {
+    fill: var(--nose);
+}
+.bear__bandana {
+    fill: var(--bandana);
+}
+.bear__fur,
+.bear__paw {
+    fill: var(--fur);
+}
+.bear__fur--light,
+.bear__paw--light {
+    fill: var(--fur-light);
+}
+.keyboard__body {
+    fill: var(--keyboard-body);
+}
+.keyboard__key {
+    fill: var(--keyboard-key);
+}
+.keyboard__key--accented {
+    fill: var(--keyboard-accent);
+}
+.bear__keyboard-arm {
+    transform: rotate(1deg);
+}
+.bear__arm_left {
+    transform: translateX(-61px);
+}
+.code-block {
+    /*fill: hsl(var(--hue), 100%, 50%);*/
+}
+label {
+    height: 44px;
+    width: 44px;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    cursor: pointer;
+}
+label > svg {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+label path {
+    fill: hsl(var(--ground-hue), 60%, 60%);
+}
+label svg:nth-of-type(1) {
+    display: none;
+}
+[type="checkbox"] {
+    height: 0;
+    width: 0;
+}
+:checked ~ label svg:nth-of-type(1) {
+    display: block;
+}
+:checked ~ label svg:nth-of-type(2) {
+    display: none;
+}
