@@ -4,33 +4,34 @@ const radToDeg = (rad) => {
     return (rad * 180) / Math.PI;
 };
 
-var stage = {
+const stage = {
     w: 1280,
     h: 720
 };
 
-var _pexcanvas = document.getElementById("canvas");
+const _pexcanvas = document.getElementById("canvas");
 _pexcanvas.width = stage.w;
 _pexcanvas.height = stage.h;
-var ctx = _pexcanvas.getContext("2d");
+const ctx = _pexcanvas.getContext("2d");
 
-var pointer = {
+const pointer = {
     x: 0,
     y: 0
 };
 
-var scale = 1;
-var portrait = true;
-var loffset = 0;
-var toffset = 0;
-var mxpos = 0;
-var mypos = 0;
+let scale = 1;
+let portrait = true;
+let loffset = 0;
+let toffset = 0;
+let mxpos = 0;
+let mypos = 0;
+
 
 // ------------------------------------------------------------------------------- Gamy
 function drawArrow(fromx, fromy, tox, toy, lw, hlen, color) {
-    var dx = tox - fromx;
-    var dy = toy - fromy;
-    var angle = Math.atan2(dy, dx);
+    const dx = tox - fromx;
+    const dy = toy - fromy;
+    const angle = Math.atan2(dy, dx);
     ctx.fillStyle = color;
     ctx.strokeStyle = color;
     ctx.lineCap = "round";
@@ -58,7 +59,7 @@ function drawArrow(fromx, fromy, tox, toy, lw, hlen, color) {
     ctx.fill();
 }
 
-var colors = [
+const colors = [
     "#1abc9c",
     "#1abc9c",
     "#3498db",
@@ -84,11 +85,11 @@ var colors = [
 ctx.clearRect(0, 0, stage.w, stage.h);
 
 // красные стрелки, разлетающиеся при взрыве (попадании синей в красную)
-// for (var i = 0; i < 200; i++) {
-//   var angle = Math.random() * Math.PI * 2;
-//   var length = Math.random() * 250 + 50;
-//   var myx = 360 + Math.sin(angle) * length;
-//   var myy = 360 - Math.cos(angle) * length;
+// for (let i = 0; i < 200; i++) {
+//   const angle = Math.random() * Math.PI * 2;
+//   const length = Math.random() * 250 + 50;
+//   const myx = 360 + Math.sin(angle) * length;
+//   const myy = 360 - Math.cos(angle) * length;
 //   drawArrow(
 //     myx,
 //     myy,
@@ -101,18 +102,18 @@ ctx.clearRect(0, 0, stage.w, stage.h);
 // }
 
 // сохраняет изображение (красных стрелок)
-var explode = new Image();
-explode.src = canvas.toDataURL("image/png");
+const explode = new Image();
+explode.src = _pexcanvas.toDataURL("image/png");
 
 // очищаем контекст
 ctx.clearRect(0, 0, stage.w, stage.h);
 
 // серые стрелки вокруг оружия при взрыве
-// for (var i = 0; i < 200; i++) {
-//   var angle = Math.random() * Math.PI - Math.PI / 2;
-//   var length = Math.random() * 480 + 50;
-//   var myx = stage.w / 2 + Math.sin(angle) * length;
-//   var myy = stage.h - Math.cos(angle) * length;
+// for (let i = 0; i < 200; i++) {
+//   const angle = Math.random() * Math.PI - Math.PI / 2;
+//   const length = Math.random() * 480 + 50;
+//   const myx = stage.w / 2 + Math.sin(angle) * length;
+//   const myy = stage.h - Math.cos(angle) * length;
 //   drawArrow(
 //     myx,
 //     myy,
@@ -125,8 +126,8 @@ ctx.clearRect(0, 0, stage.w, stage.h);
 // }
 
 // сохраняет  серые стрелки в img
-var explodeb = new Image();
-explodeb.src = canvas.toDataURL("image/png");
+const explodeb = new Image();
+explodeb.src = _pexcanvas.toDataURL("image/png");
 
 // очистили контекст
 ctx.clearRect(0, 0, stage.w, stage.h);
@@ -135,11 +136,11 @@ ctx.clearRect(0, 0, stage.w, stage.h);
 // ctx.fillRect(0, 0, stage.w, stage.h);
 
 // стрелочки на фоне
-// for (var i = 0; i < 200; i++) {
-//   var angle = ((Math.random() * Math.PI) / Math.PI) * 180;
-//   var length = Math.random() * 250 + 50;
-//   var myx = Math.random() * stage.w;
-//   var myy = Math.random() * stage.h;
+// for (let i = 0; i < 200; i++) {
+//   const angle = ((Math.random() * Math.PI) / Math.PI) * 180;
+//   const length = Math.random() * 250 + 50;
+//   const myx = Math.random() * stage.w;
+//   const myy = Math.random() * stage.h;
 //   drawArrow(
 //     myx,
 //     myy,
@@ -154,21 +155,21 @@ ctx.clearRect(0, 0, stage.w, stage.h);
 ctx.fillStyle = "rgba(236,240,241,0.9)";
 // перезаливает канвас цветом, чтобы стрелочки перерисовывались а не двоились
 ctx.fillRect(0, 0, stage.w, stage.h);
-var back = new Image();
-back.src = canvas.toDataURL("image/png");
+const back = new Image();
+back.src = _pexcanvas.toDataURL("image/png");
 
-var angle = 0;
-var ai = true;
-var ait = 0;
-var btm = 0;
-var bullets = [];
+let angle = 0;
+let ai = true;
+let ait = 0;
+let btm = 0;
+const bullets = [];
 
 function Bullet() {
     this.x = stage.w / 2 - Math.sin(angle) * 150;
     this.y = stage.h - Math.cos(angle) * 150 - 100;
     this.r = angle;
 }
-var enemies = [];
+const enemies = [];
 function Enemy() {
     this.r = (Math.random() * Math.PI) / (2.5 / 2) - Math.PI / 2.5;
     this.dis = Math.random() * stage.w + stage.h;
@@ -176,14 +177,14 @@ function Enemy() {
     this.y = stage.h - Math.cos(this.r) * this.dis;
 }
 
-for (var i = 0; i < 10; i++) {
+for (let i = 0; i < 10; i++) {
     enemies.push(new Enemy());
     enemies[i].x += Math.sin(enemies[i].r) * 300;
     enemies[i].y += Math.cos(enemies[i].r) * 300;
 }
 
 // взрывы
-var explosions = [];
+const explosions = [];
 function Explosion(x, y, ty) {
     this.x = x;
     this.y = y;
@@ -191,8 +192,8 @@ function Explosion(x, y, ty) {
     this.ty = ty;
 }
 
-var eturn = 0;
-var cold = [];
+let eturn = 0;
+const cold = [];
 function enginestep() {
     // рисуем бэк
     ctx.drawImage(back, 0, 0);
@@ -206,7 +207,7 @@ function enginestep() {
     }
 
     // рисуем синие стрелки для массива bullets (пуль)
-    for (var i = 0; i < bullets.length; i++) {
+    for (let i = 0; i < bullets.length; i++) {
         // число 20 - скорость с которой улетает пуля
         bullets[i].x -= Math.sin(bullets[i].r) * 20;
         bullets[i].y -= Math.cos(bullets[i].r) * 20;
@@ -230,7 +231,7 @@ function enginestep() {
     }
 
     // рисуем красные стрелки изменяя текущий массив
-    for (var i = 0; i < enemies.length; i++) {
+    for (let i = 0; i < enemies.length; i++) {
         enemies[i].x += Math.sin(enemies[i].r) * 2;
         enemies[i].y += Math.cos(enemies[i].r) * 2;
         drawArrow(
@@ -248,10 +249,10 @@ function enginestep() {
             shake = true;
             shaket = 0;
         }
-        for (var b = 0; b < bullets.length; b++) {
-            var dx = enemies[i].x - bullets[b].x;
-            var dy = enemies[i].y - bullets[b].y;
-            var dis = dx * dx + dy * dy;
+        for (let b = 0; b < bullets.length; b++) {
+            const dx = enemies[i].x - bullets[b].x;
+            const dy = enemies[i].y - bullets[b].y;
+            const dis = dx * dx + dy * dy;
             // точность попадания
             if (dis < 20 * 20) {
                 explosions.push(new Explosion(enemies[i].x, enemies[i].y, 1));
@@ -263,12 +264,12 @@ function enginestep() {
 
     // если нет курсора, то автоматическая стрельба
     if (ai) {
-        for (var l = 0; l < enemies.length; l++) {
-            var dx = enemies[l].x - stage.w / 2;
-            var dy = enemies[l].y - stage.h;
-            var dis = Math.floor(Math.sqrt(dx * dx + dy * dy));
-            var val1 = 10000 + dis;
-            var val2 = 1000 + l;
+        for (let l = 0; l < enemies.length; l++) {
+            const dx = enemies[l].x - stage.w / 2;
+            const dy = enemies[l].y - stage.h;
+            const dis = Math.floor(Math.sqrt(dx * dx + dy * dy));
+            const val1 = 10000 + dis;
+            const val2 = 1000 + l;
             cold[l] = val1 + "x" + val2;
         }
 
@@ -280,8 +281,8 @@ function enginestep() {
         }
     } else {
         // если есть курсор
-        var dx = pointer.x - stage.w / 2;
-        var dy = pointer.y - stage.h;
+        const dx = pointer.x - stage.w / 2;
+        const dy = pointer.y - stage.h;
         angle = Math.atan(dx / dy);
     }
 
@@ -290,7 +291,6 @@ function enginestep() {
         const keyboardWithArms = document.getElementsByClassName(
             "bear__keyboard-arm"
         )[0];
-        debugger;
         // console.log(radToDeg(angle));
         // transformOrigin.style.transform = "rotate(" + radToDeg(angle) + "deg)";
         const bearSvg = document.getElementById("bearSvg");
@@ -385,9 +385,9 @@ function enginestep() {
     //   "#2c3e50"
     // );
 
-    for (var e = 0; e < explosions.length; e++) {
-        if (explosions[e].ty == 1) {
-            var myimg = explode;
+    for (let e = 0; e < explosions.length; e++) {
+        if (+explosions[e].ty === 1) {
+            const myimg = explode;
             ctx.globalAlpha = 1 - explosions[e].t / stage.h;
             ctx.drawImage(
                 myimg,
@@ -398,7 +398,7 @@ function enginestep() {
             );
             ctx.globalAlpha = 1;
         } else {
-            var myimg = explodeb;
+            const myimg = explodeb;
             ctx.globalAlpha = 1 - explosions[e].t / stage.h;
             ctx.drawImage(
                 myimg,
@@ -411,7 +411,7 @@ function enginestep() {
         }
     }
 
-    for (var e = 0; e < explosions.length; e++) {
+    for (let e = 0; e < explosions.length; e++) {
         explosions[e].t += 20;
         if (explosions[e].t > stage.h) {
             explosions.splice(e, 1);
@@ -425,15 +425,16 @@ function enginestep() {
 // ------------------------------------------------------------------------------- events
 
 function toggleFullScreen() {
-    var doc = window.document;
-    var docEl = doc.documentElement;
+    const doc = window.document;
+    const docEl = doc.documentElement;
 
-    var requestFullScreen =
+    const requestFullScreen =
         docEl.requestFullscreen ||
         docEl.mozRequestFullScreen ||
         docEl.webkitRequestFullScreen ||
         docEl.msRequestFullscreen;
-    var cancelFullScreen =
+
+    const cancelFullScreen =
         doc.exitFullscreen ||
         doc.mozCancelFullScreen ||
         doc.webkitExitFullscreen ||
@@ -519,8 +520,8 @@ window.addEventListener(
 // ------------------------------------------------------------------------ stager
 // ------------------------------------------------------------------------ stager
 function _pexresize() {
-    var cw = window.innerWidth;
-    var ch = window.innerHeight;
+    const cw = window.innerWidth;
+    const ch = window.innerHeight;
     if (cw <= (ch * stage.w) / stage.h) {
         portrait = true;
         scale = stage.w / cw;
@@ -559,21 +560,22 @@ function sfps(iny) {
     return (Math.floor(smoothfps) / 60) * iny;
 }
 
-var timebomb = 0;
-var lastCalledTime;
-var fpcount = 0;
-var fpall = 0;
-var smoothfps = 60;
-var thisfps = 60;
+let timebomb = 0;
+let lastCalledTime;
+let fpcount = 0;
+let fpall = 0;
+const smoothfps = 60;
+let thisfps = 60;
+
 function fpscounter() {
     timebomb++;
     if (!lastCalledTime) {
         lastCalledTime = Date.now();
         return;
     }
-    var delta = (Date.now() - lastCalledTime) / 1000;
+    const delta = (Date.now() - lastCalledTime) / 1000;
     lastCalledTime = Date.now();
-    var fps = 1 / delta;
+    const fps = 1 / delta;
     fpcount++;
     fpall += fps;
     if (timebomb > 30) {
@@ -584,13 +586,16 @@ function fpscounter() {
     }
 }
 
-var shake = false;
-var shaket = 0;
+let shake = false;
+let shaket = 0;
+let trax;
+let tray;
+
 function animated() {
     requestAnimationFrame(animated);
     if (shake) {
-        var trax = Math.random() * 60 - 30;
-        var tray = Math.random() * 60 - 30;
+        trax = Math.random() * 60 - 30;
+        tray = Math.random() * 60 - 30;
         ctx.translate(trax, tray);
     }
     // fpscounter();
