@@ -1,6 +1,7 @@
 
 
 document.addEventListener('DOMContentLoaded', function() {
+    const BULLET_SPEED = 18;
     const stage = {
         w: 1280,
         h: 720
@@ -114,27 +115,35 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.fill();
     }
 
-    // const colors = [
-    //     "#1abc9c",
-    //     "#1abc9c",
-    //     "#3498db",
-    //     "#9b59b6",
-    //     "#34495e",
-    //     "#16a085",
-    //     "#27ae60",
-    //     "#2980b9",
-    //     "#8e44ad",
-    //     "#2c3e50",
-    //     "#f1c40f",
-    //     "#e67e22",
-    //     "#e74c3c",
-    //     "#95a5a6",
-    //     "#f39c12",
-    //     "#d35400",
-    //     "#c0392b",
-    //     "#bdc3c7",
-    //     "#7f8c8d"
-    // ];
+    const COLORS = [
+        "#1abc9c",
+        "#1abc9c",
+        "#3498db",
+        "#9b59b6",
+        "#34495e",
+        "#16a085",
+        "#27ae60",
+        "#2980b9",
+        "#8e44ad",
+        "#2c3e50",
+        "#f1c40f",
+        "#e67e22",
+        "#e74c3c",
+        "#95a5a6",
+        "#f39c12",
+        "#d35400",
+        "#c0392b",
+        "#bdc3c7",
+        "#7f8c8d"
+    ];
+
+    function drawBullet(dx, dy, color) {
+        ctx.font = "bold 25px Arial";
+        ctx.fillStyle = color;
+        ctx.fillText("< / >", dx, dy);
+    }
+
+
 
 // очистили контекст перед началом работы
     ctx.clearRect(0, 0, stage.w, stage.h);
@@ -223,6 +232,7 @@ document.addEventListener('DOMContentLoaded', function() {
         this.x = stage.w / 2 - Math.sin(angle) * 150;
         this.y = stage.h - Math.cos(angle) * 150 - 100;
         this.r = angle;
+        this.color = COLORS[Math.floor(Math.random() * 19)];
     }
     let enemies = [];
     function Enemy() {
@@ -265,20 +275,14 @@ document.addEventListener('DOMContentLoaded', function() {
             bullets.push(new Bullet());
         }
 
-        // рисуем синие стрелки для массива bullets (пуль)
+        // рисуем пули из массива bullets (пуль)
         for (let i = 0; i < bullets.length; i++) {
-            // число 20 - скорость с которой улетает пуля
-            bullets[i].x -= Math.sin(bullets[i].r) * 20;
-            bullets[i].y -= Math.cos(bullets[i].r) * 20;
-            drawArrow(
-                // число 50 это то насколько длинная линия за стрелкой
-                bullets[i].x + Math.sin(bullets[i].r) * 50,
-                bullets[i].y + Math.cos(bullets[i].r) * 50,
+            bullets[i].x -= Math.sin(bullets[i].r) * BULLET_SPEED;
+            bullets[i].y -= Math.cos(bullets[i].r) * BULLET_SPEED;
+            drawBullet(
                 bullets[i].x,
                 bullets[i].y,
-                8,
-                8,
-                "#2980b9"
+                bullets[i].color,
             );
             // если улетела пуля по оси х или по у то вырезаем её из массива
             if (bullets[i].x < -100 || bullets[i].x > stage.w + 100) {
