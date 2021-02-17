@@ -351,15 +351,15 @@ document.addEventListener('DOMContentLoaded', function() {
         for (let i = 0; i < enemies.length; i++) {
             enemies[i].x += Math.sin(enemies[i].r) * 2;
             enemies[i].y += Math.cos(enemies[i].r) * 2;
-            drawArrow(
-                enemies[i].x - Math.sin(enemies[i].r) * 100,
-                enemies[i].y - Math.cos(enemies[i].r) * 100,
-                enemies[i].x,
-                enemies[i].y,
-                15,
-                15,
-                "#c0392b"
-            );
+            // drawArrow(
+            //     enemies[i].x - Math.sin(enemies[i].r) * 100,
+            //     enemies[i].y - Math.cos(enemies[i].r) * 100,
+            //     enemies[i].x,
+            //     enemies[i].y,
+            //     15,
+            //     15,
+            //     "#c0392b"
+            // );
             drawBag(enemies[i].x - Math.sin(enemies[i].r) * 100,
                 enemies[i].y - Math.cos(enemies[i].r) * 100,
                 enemies[i].x,
@@ -701,7 +701,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // tray = Math.random() * 60 - 30;
             // ctx.translate(trax, tray);
         }
-        
+
         if(!isGameOver){
             enginestep();
         }
