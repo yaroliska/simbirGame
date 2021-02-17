@@ -356,7 +356,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const keyboardWithArms = document.getElementsByClassName(
                 "bear__keyboard-arm"
             )[0];
-            debugger;
+            // debugger;
             // console.log(radToDeg(angle));
             // transformOrigin.style.transform = "rotate(" + radToDeg(angle) + "deg)";
             const bearSvg = document.getElementById("bearSvg");
@@ -621,34 +621,6 @@ document.addEventListener('DOMContentLoaded', function() {
         );
     })();
 
-    // function sfps(iny) {
-    //     return (Math.floor(smoothfps) / 60) * iny;
-    // }
-
-    let timebomb = 0;
-    let lastCalledTime;
-    let fpcount = 0;
-    let fpall = 0;
-    let smoothfps = 60;
-    let thisfps = 60;
-    function fpscounter() {
-        timebomb++;
-        if (!lastCalledTime) {
-            lastCalledTime = Date.now();
-            return;
-        }
-        const delta = (Date.now() - lastCalledTime) / 1000;
-        lastCalledTime = Date.now();
-        const fps = 1 / delta;
-        fpcount++;
-        fpall += fps;
-        if (timebomb > 30) {
-            thisfps = parseInt((fpall / fpcount) * 10) / 10;
-            fpcount = 0;
-            fpall = 0;
-            timebomb = 0;
-        }
-    }
 
     let shake = false;
     let shaket = 0;
@@ -661,22 +633,11 @@ document.addEventListener('DOMContentLoaded', function() {
             // tray = Math.random() * 60 - 30;
             // ctx.translate(trax, tray);
         }
-        fpscounter();
-        ctx.clearRect(0,0,_pexcanvas.width,_pexcanvas.height);
+        
         if(!isGameOver){
             enginestep();
         }
-        ctx.fillStyle='#8e44ad';
-        ctx.font = "24px arial";
 
-        ctx.textAlign = "left";
-        ctx.fillText(thisfps,20,50);
-        smoothfps += (thisfps-smoothfps)/100;
-        ctx.fillText(cold[0].slice(1,6),20,80);
-        ctx.beginPath();
-        ctx.arc(pointer.x, pointer.y, 50, 0, Math.PI*2,false);
-        ctx.closePath();
-        ctx.fill();
         if (shake) {
             // ctx.translate(-trax, -tray);
             shaket++;
