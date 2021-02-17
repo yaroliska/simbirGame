@@ -117,11 +117,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function getCenterOfLine(fromx, fromy, tox, toy){
         const xPoint = (fromx+tox)/2;
         const yPoint = (fromy+toy)/2;
-        return {x:xPoint+50, y: yPoint+15};
+        return {x:xPoint+85, y: yPoint+65};
     }
 
     function drawBag(fromx,fromy, tox, toy, id) {
-        if (id) {
+        if (id!==undefined) {
             const dx = tox - fromx;
             const dy = toy - fromy;
             const angle = Math.atan2(dy, dx);
@@ -347,15 +347,15 @@ document.addEventListener('DOMContentLoaded', function() {
         for (let i = 0; i < enemies.length; i++) {
             enemies[i].x += Math.sin(enemies[i].r) * 2;
             enemies[i].y += Math.cos(enemies[i].r) * 2;
-            // drawArrow(
-            //     enemies[i].x - Math.sin(enemies[i].r) * 100,
-            //     enemies[i].y - Math.cos(enemies[i].r) * 100,
-            //     enemies[i].x,
-            //     enemies[i].y,
-            //     15,
-            //     15,
-            //     "#c0392b"
-            // );
+            drawArrow(
+                enemies[i].x - Math.sin(enemies[i].r) * 100,
+                enemies[i].y - Math.cos(enemies[i].r) * 100,
+                enemies[i].x,
+                enemies[i].y,
+                15,
+                15,
+                "#c0392b"
+            );
             drawBag(enemies[i].x - Math.sin(enemies[i].r) * 100,
                 enemies[i].y - Math.cos(enemies[i].r) * 100,
                 enemies[i].x,
