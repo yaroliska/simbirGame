@@ -63,6 +63,17 @@ canvas {
 svg {
     width: 250px;
     height: 350px;
+    position: absolute;
+}
+
+#bugSvg{
+    width: 110px;
+    height: 150px;
+    visibility: hidden;
+}
+
+#bugContainer{
+    position: absolute;
 }
 .ground {
     --alpha: 0.5;
