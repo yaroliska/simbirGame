@@ -114,6 +114,60 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.fill();
     }
 
+    function getCenterOfLine(fromx, fromy, tox, toy){
+        const xPoint = (fromx+tox)/2;
+        const yPoint = (fromy+toy)/2;
+        return {x:xPoint+50, y: yPoint+15};
+    }
+
+    function drawBag(fromx,fromy, tox, toy, id) {
+        if (id) {
+            const dx = tox - fromx;
+            const dy = toy - fromy;
+            const angle = Math.atan2(dy, dx);
+            // если такой баг уже есть, то двигаем его, если нет - создаем новый
+            const isExistBug = document.getElementById(`bugCopy_${id}`);
+            const point = getCenterOfLine(fromx, fromy, tox, toy);
+            if (isExistBug) {
+                isExistBug.style.left = point.x;
+                isExistBug.style.top = point.y;
+                let move;
+                if (radToDeg(angle) > 90) {
+                    move = `rotate(${90 + radToDeg(angle)}deg)`;
+                } else {
+                    move = `rotate(${90 + radToDeg(angle)}deg)`;
+                }
+                isExistBug.style.transform = move;
+            } else {
+                // скопировали баг
+                const bugOrigin = document.getElementById('bugSvg');
+                // задали ему свойства
+                const newBug = bugOrigin.cloneNode(true);
+                newBug.style.left = point.x;
+                newBug.style.top = point.y;
+                newBug.style.width = "110px"; //TODO скорректировать размер в зависимости от экрана
+                newBug.style.height = "150px"; //TODO скорректировать размер в зависимости от экрана
+                newBug.setAttribute("id", `bugCopy_${id}`);
+
+                let move;
+                if (radToDeg(angle) > 90) {
+                    move = `rotate(${90 + radToDeg(angle)}deg)`;
+                } else {
+                    move = `rotate(${90 + radToDeg(angle)}deg)`;
+                }
+                newBug.style.transform = move;
+                // добавили в контейнер
+                const bugContainer = document.getElementById('bugContainer');
+                bugContainer.appendChild(newBug);
+            }
+
+            //TODO скорректировать размер бага в зависимости от экрана
+        }
+    }
+
+
+    drawBag();
+
     // const colors = [
     //     "#1abc9c",
     //     "#1abc9c",
@@ -293,15 +347,20 @@ document.addEventListener('DOMContentLoaded', function() {
         for (let i = 0; i < enemies.length; i++) {
             enemies[i].x += Math.sin(enemies[i].r) * 2;
             enemies[i].y += Math.cos(enemies[i].r) * 2;
-            drawArrow(
-                enemies[i].x - Math.sin(enemies[i].r) * 100,
+            // drawArrow(
+            //     enemies[i].x - Math.sin(enemies[i].r) * 100,
+            //     enemies[i].y - Math.cos(enemies[i].r) * 100,
+            //     enemies[i].x,
+            //     enemies[i].y,
+            //     15,
+            //     15,
+            //     "#c0392b"
+            // );
+            drawBag(enemies[i].x - Math.sin(enemies[i].r) * 100,
                 enemies[i].y - Math.cos(enemies[i].r) * 100,
                 enemies[i].x,
-                enemies[i].y,
-                15,
-                15,
-                "#c0392b"
-            );
+                enemies[i].y, i);
+
             if (enemies[i].y > stage.h) {
                 getMiss();
                 enemies[i] = new Enemy();
@@ -314,7 +373,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const dy = enemies[i].y - bullets[b].y;
                 const dis = dx * dx + dy * dy;
                 // точность попадания
-                if (dis < 20 * 20) {
+                if (dis < 40 * 40) {
                     getHit();
                     explosions.push(new Explosion(enemies[i].x, enemies[i].y, 1));
                     enemies[i] = new Enemy();
@@ -322,6 +381,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         }
+
 
         // если нет курсора, то автоматическая стрельба
         if (ai) {
@@ -590,6 +650,11 @@ document.addEventListener('DOMContentLoaded', function() {
             toffset = Math.floor(ch - (cw * stage.h) / stage.w) / 2;
             _pexcanvas.style.width = cw + "px";
             _pexcanvas.style.height = Math.floor((cw * stage.h) / stage.w) + "px";
+
+            //TODO настроить ресайз окна для жуков
+            const bagContainer = document.getElementById('bugContainer');
+            bagContainer.style.width = cw + "px";
+            bagContainer.style.height = cw + Math.floor((cw * stage.h) / stage.w) + "px";
             // _pexcanvas.style.marginLeft = loffset + "px";
             // _pexcanvas.style.marginTop = toffset + "px";
         } else {
@@ -599,6 +664,9 @@ document.addEventListener('DOMContentLoaded', function() {
             toffset = 0;
             _pexcanvas.style.height = ch + "px";
             _pexcanvas.style.width = Math.floor((ch * stage.w) / stage.h) + "px";
+            const bagContainer = document.getElementById('bugContainer');
+            bagContainer.style.height = ch + "px";
+            bagContainer.style.width = Math.floor((ch * stage.w) / stage.h) + "px";
             // _pexcanvas.style.marginLeft = loffset + "px";
             // _pexcanvas.style.marginTop = toffset + "px";
         }
