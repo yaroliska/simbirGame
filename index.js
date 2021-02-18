@@ -424,6 +424,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // debugger;
             // console.log(radToDeg(angle));
             // transformOrigin.style.transform = "rotate(" + radToDeg(angle) + "deg)";
+            const logo = document.getElementById('simbirsoft');
+            const logo2 = document.getElementById('simbirsoft2');
             const bearSvg = document.getElementById("bearSvg");
             bearSvg.style.width = `${300/scale}px`;
             bearSvg.style.height = `${396/scale}px`;
@@ -439,6 +441,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     -radToDeg(angle) * 2.3 + 20
                 }deg) translate(95px, 82px)`;
                 // console.log(radToDeg(angle));
+                logo.style.transform = `translate(63px, 83px) scale(1, 1)`;
+                logo2.style.transform = `translate(61px, 117px) scale(1, 1)`;
                 if (radToDeg(angle) < 13) {
                     forearmGroup.style.transformOrigin = "150px 200px";
                     forearmGroup.style.transform = `rotate(${
@@ -469,6 +473,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             } else {
                 bearSvg.style.transform = `scale(-1, 1) translateX(${-90/scale}px)`;
+                logo.style.transform = `translate(70px, 83px) scale(-1, 1)`;
+                logo2.style.transform = `translate(79px, 117px) scale(-1, 1)`;
+
                 keyboardWithArms.style.transform = `rotate(${radToDeg(angle) + 80}deg)`;
                 bearLeftShoulder.style.transform = `rotate(${
                     radToDeg(angle) * 2.3 + 20
@@ -755,6 +762,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     _pexresize();
+
+    const logo = document.getElementById('simbirsoft');
+    const logo2 = document.getElementById('simbirsoft2');
+    logo.style.transform = `translate(70px, 83px) scale(-1, 1)`;
+    logo2.style.transform = `translate(79px, 117px) scale(-1, 1)`;
 
     const welcomeModal = document.querySelector('.welcome');
     welcomeModal.querySelector('.welcome__slogan').addEventListener('click', function(){
