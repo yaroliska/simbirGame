@@ -9,8 +9,9 @@
     <title>23day</title>
 </head>
 <body>
+<div class="allContent">
 <div class="container">
-    <div class="welcome">
+    <div class="welcome" id="welcomeContainer">
         <button class="welcome__slogan"><img class="btn" src="balloon.svg"></button>
     </div>
     <canvas id="canvas" width="1280" height="720"></canvas>
@@ -148,8 +149,10 @@
             </g>
         </g>
     </svg>
-    <div class="life"></div>
-    <p class="counter">Счёт: <span>0</span></p>
+    <div id="lifeAndCounter">
+        <p class="counter">Счёт: <span>0</span></p>
+        <div class="life"></div>
+    </div>
     <div class="statistics hidden">
         <div class="statistics__modal">
             <img src="game-over.svg">
@@ -158,6 +161,7 @@
             <button class="btn">Сыграть еще раз!</button>
         </div>
     </div>
+</div>
 </div>
 <script src="index.js"></script>
 </body>

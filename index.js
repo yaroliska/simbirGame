@@ -33,9 +33,9 @@ document.addEventListener('DOMContentLoaded', function() {
     let missCounter = 0;
     let killCounter = 0;
     let isGameOver = false;
-    const MAX_MISS = 1;
+    const MAX_MISS = 10;
     const life = [];
-    
+
     const audioGameOver = new Audio('gameover.mp3');
     const audioMiss = new Audio('miss.mp3');
 
@@ -91,36 +91,36 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 // ------------------------------------------------------------------------------- Gamy
-    function drawArrow(fromx, fromy, tox, toy, lw, hlen, color) {
-        const dx = tox - fromx;
-        const dy = toy - fromy;
-        const angle = Math.atan2(dy, dx);
-        ctx.fillStyle = color;
-        ctx.strokeStyle = color;
-        ctx.lineCap = "round";
-        ctx.lineWidth = lw;
-        ctx.beginPath();
-        ctx.moveTo(fromx, fromy);
-        ctx.lineTo(tox, toy);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(tox, toy);
-        ctx.lineTo(
-            tox - hlen * Math.cos(angle - Math.PI / 6),
-            toy - hlen * Math.sin(angle - Math.PI / 6)
-        );
-        ctx.lineTo(
-            tox - (hlen * Math.cos(angle)) / 2,
-            toy - (hlen * Math.sin(angle)) / 2
-        );
-        ctx.lineTo(
-            tox - hlen * Math.cos(angle + Math.PI / 6),
-            toy - hlen * Math.sin(angle + Math.PI / 6)
-        );
-        ctx.closePath();
-        ctx.stroke();
-        ctx.fill();
-    }
+//     function drawArrow(fromx, fromy, tox, toy, lw, hlen, color) {
+//         const dx = tox - fromx;
+//         const dy = toy - fromy;
+//         const angle = Math.atan2(dy, dx);
+//         ctx.fillStyle = color;
+//         ctx.strokeStyle = color;
+//         ctx.lineCap = "round";
+//         ctx.lineWidth = lw;
+//         ctx.beginPath();
+//         ctx.moveTo(fromx, fromy);
+//         ctx.lineTo(tox, toy);
+//         ctx.stroke();
+//         ctx.beginPath();
+//         ctx.moveTo(tox, toy);
+//         ctx.lineTo(
+//             tox - hlen * Math.cos(angle - Math.PI / 6),
+//             toy - hlen * Math.sin(angle - Math.PI / 6)
+//         );
+//         ctx.lineTo(
+//             tox - (hlen * Math.cos(angle)) / 2,
+//             toy - (hlen * Math.sin(angle)) / 2
+//         );
+//         ctx.lineTo(
+//             tox - hlen * Math.cos(angle + Math.PI / 6),
+//             toy - hlen * Math.sin(angle + Math.PI / 6)
+//         );
+//         ctx.closePath();
+//         ctx.stroke();
+//         ctx.fill();
+//     }
 
     const COLORS = [
         "#1abc9c",
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function getCenterOfLine(fromx, fromy, tox, toy){
         const xPoint = (fromx+tox)/2;
         const yPoint = (fromy+toy)/2;
-        return {x:xPoint+85, y: yPoint+65};
+        return {x:xPoint-45, y: yPoint-75};
     }
 
     function drawBag(fromx,fromy, tox, toy, id) {
@@ -158,8 +158,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const isExistBug = document.getElementById(`bugCopy_${id}`);
             const point = getCenterOfLine(fromx, fromy, tox, toy);
             if (isExistBug) {
-                isExistBug.style.left = point.x;
-                isExistBug.style.top = point.y;
+                isExistBug.style.left = point.x/scale;
+                isExistBug.style.top = point.y/scale;
                 let move;
                 if (radToDeg(angle) > 90) {
                     move = `rotate(${90 + radToDeg(angle)}deg)`;
@@ -172,10 +172,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 const bugOrigin = document.getElementById('bugSvg');
                 // задали ему свойства
                 const newBug = bugOrigin.cloneNode(true);
-                newBug.style.left = point.x;
-                newBug.style.top = point.y;
-                newBug.style.width = "110px"; //TODO скорректировать размер в зависимости от экрана
-                newBug.style.height = "150px"; //TODO скорректировать размер в зависимости от экрана
+                newBug.style.left = point.x/scale;
+                newBug.style.top = point.y/scale;
+                newBug.style.width = `${90/scale}px`; //TODO скорректировать размер в зависимости от экрана
+                newBug.style.height = `${127/scale}px`; //TODO скорректировать размер в зависимости от экрана
                 newBug.setAttribute("id", `bugCopy_${id}`);
 
                 let move;
@@ -189,8 +189,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 const bugContainer = document.getElementById('bugContainer');
                 bugContainer.appendChild(newBug);
             }
-
-            //TODO скорректировать размер бага в зависимости от экрана
         }
     }
 
@@ -291,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function Bullet() {
         this.x = stage.w / 2 - Math.sin(angle) * 150;
-        this.y = stage.h - Math.cos(angle) * 150 - 100;
+        this.y = stage.h - Math.cos(angle) * 150 - 52/scale;
         this.r = angle;
         this.color = COLORS[Math.floor(Math.random() * 19)];
     }
@@ -426,12 +424,16 @@ document.addEventListener('DOMContentLoaded', function() {
             // debugger;
             // console.log(radToDeg(angle));
             // transformOrigin.style.transform = "rotate(" + radToDeg(angle) + "deg)";
+            const bearSvg = document.getElementById("bearSvg");
+            bearSvg.style.width = `${300/scale}px`;
+            bearSvg.style.height = `${396/scale}px`;
+            bearSvg.style.bottom = `${-52/scale}px`
             const bearLeftShoulder = document.getElementById("shoulder-arm");
             const forearmGroup = document.getElementById("forearm-group");
             forearmGroup.style.display = "block";
 
             if (radToDeg(angle) > 0) {
-                bearSvg.style.transform = `scale(1, 1) translateX(-55px)`;
+                bearSvg.style.transform = `scale(1, 1) translateX(${-60/scale}px)`;
                 keyboardWithArms.style.transform = `rotate(${-radToDeg(angle) + 80}deg)`;
                 bearLeftShoulder.style.transform = `rotate(${
                     -radToDeg(angle) * 2.3 + 20
@@ -466,12 +468,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     forearmGroup.style.display = "none";
                 }
             } else {
-                bearSvg.style.transform = `scale(-1, 1) translateX(-55px)`;
+                bearSvg.style.transform = `scale(-1, 1) translateX(${-90/scale}px)`;
                 keyboardWithArms.style.transform = `rotate(${radToDeg(angle) + 80}deg)`;
                 bearLeftShoulder.style.transform = `rotate(${
                     radToDeg(angle) * 2.3 + 20
                 }deg) translate(95px, 82px)`;
-                console.log(radToDeg(angle));
+                // console.log(radToDeg(angle));
 
                 if (radToDeg(angle) > -13) {
                     forearmGroup.style.transformOrigin = "150px 200px";
@@ -610,7 +612,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "mousemove",
         function (e) {
             motchmove(e);
-            console.log(e.clientX, e.clientY);
+            // console.log(e.clientX, e.clientY);
         },
         false
     );
@@ -670,7 +672,15 @@ document.addEventListener('DOMContentLoaded', function() {
             //TODO настроить ресайз окна для жуков
             const bagContainer = document.getElementById('bugContainer');
             bagContainer.style.width = cw + "px";
-            bagContainer.style.height = cw + Math.floor((cw * stage.h) / stage.w) + "px";
+            bagContainer.style.height = Math.floor((cw * stage.h) / stage.w) + "px";
+
+            const welcomeContainer = document.getElementById('welcomeContainer');
+            welcomeContainer.style.width = cw + "px";
+            welcomeContainer.style.height = Math.floor((cw * stage.h) / stage.w) + "px";
+
+            const lifeAndCounter = document.getElementById('lifeAndCounter');
+            lifeAndCounter.style.height = Math.floor((cw * stage.h) / stage.w) + "px";
+            lifeAndCounter.style.width = cw + "px";
             // _pexcanvas.style.marginLeft = loffset + "px";
             // _pexcanvas.style.marginTop = toffset + "px";
         } else {
@@ -680,9 +690,18 @@ document.addEventListener('DOMContentLoaded', function() {
             toffset = 0;
             _pexcanvas.style.height = ch + "px";
             _pexcanvas.style.width = Math.floor((ch * stage.w) / stage.h) + "px";
+
             const bagContainer = document.getElementById('bugContainer');
             bagContainer.style.height = ch + "px";
             bagContainer.style.width = Math.floor((ch * stage.w) / stage.h) + "px";
+
+            const welcomeContainer = document.getElementById('welcomeContainer');
+            welcomeContainer.style.height = ch + "px";
+            welcomeContainer.style.width = Math.floor((ch * stage.w) / stage.h) + "px";
+
+            const lifeAndCounter = document.getElementById('lifeAndCounter');
+            lifeAndCounter.style.height = ch + "px";
+            lifeAndCounter.style.width = Math.floor((ch * stage.w) / stage.h) + "px";
             // _pexcanvas.style.marginLeft = loffset + "px";
             // _pexcanvas.style.marginTop = toffset + "px";
         }
@@ -729,7 +748,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     _pexresize();
-    
+
     const welcomeModal = document.querySelector('.welcome');
     welcomeModal.querySelector('.welcome__slogan').addEventListener('click', function(){
         welcomeModal.classList.add('hidden');
