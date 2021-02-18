@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="index.css" />
     <title>23day</title>
 </head>
-<body onresize="_pexresize()">
+<body>
 <div class="container">
+    <div class="welcome">
+        <button class="welcome__slogan"><img class="btn" src="balloon.svg"></button>
+    </div>
     <canvas id="canvas" width="1280" height="720"></canvas>
     <div id="bugContainer" width="1280" height="720"></div>
     <svg id="bugSvg" width="333" height="468" viewBox="0 0 333 468" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -52,7 +55,7 @@
             </g>
         </g>
     </svg>
-    <svg id="bearSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 194.05 50.82">
+    <svg class="welcome-bear" id="bearSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 194.05 50.82">
         <g transform="translate(58.03 -57.75)">
             <rect class="ground" ry="3.18" y="172.21" x="33.49" height="6.36" width="102.52" style="stroke: none; stroke-width: 15.875; stroke-linecap: square; stroke-linejoin: round; stroke-miterlimit: 4; stroke-dasharray: none; stroke-dashoffset: 0; stroke-opacity: 1; --alpha:0.2941;"></rect>
             <path class="bear__jeans" d="M79.38 136.78a39.24 46.3 0 00-38.63 38.36h12.92a25.95 30.62 0 01.3-2.26 25.95 30.62 0 01.64-2.97 25.95 30.62 0 01.89-2.87 25.95 30.62 0 011.12-2.76 25.95 30.62 0 011.36-2.6 25.95 30.62 0 011.57-2.45 25.95 30.62 0 011.77-2.23 25.95 30.62 0 011.95-2.02 25.95 30.62 0 012.1-1.78 25.95 30.62 0 012.26-1.53 25.95 30.62 0 012.36-1.25 25.95 30.62 0 012.47-.96 25.95 30.62 0 012.53-.67 25.95 30.62 0 012.57-.37 25.95 30.62 0 011.84-.08 25.95 30.62 0 012.59.16 25.95 30.62 0 012.56.45 25.95 30.62 0 012.52.76 25.95 30.62 0 012.43 1.05 25.95 30.62 0 012.34 1.33 25.95 30.62 0 012.2 1.6 25.95 30.62 0 012.07 1.85 25.95 30.62 0 011.9 2.09 25.95 30.62 0 011.71 2.3 25.95 30.62 0 011.51 2.49 25.95 30.62 0 011.3 2.65 25.95 30.62 0 011.05 2.8 25.95 30.62 0 01.82 2.9 25.95 30.62 0 01.57 2.98 25.95 30.62 0 01.14 1.4h12.93a39.24 46.3 0 00-38.66-38.37z" style="opacity:1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:14.61518764;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"></path>
@@ -147,11 +150,12 @@
     </svg>
     <div class="life"></div>
     <p class="counter">Счёт: <span>0</span></p>
-    <div class="statistics">
+    <div class="statistics hidden">
         <div class="statistics__modal">
-            <h1>Игра завершена!</h1>
-            <p>Твой счёт: <span></span></p>
-            <button>Сыграть еще раз!</button>
+            <img src="game-over.svg">
+            <h2>Твой счёт: 👊 <span></span> 👊</h2>
+            <p></p>
+            <button class="btn">Сыграть еще раз!</button>
         </div>
     </div>
 </div>
