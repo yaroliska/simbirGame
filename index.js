@@ -658,7 +658,7 @@ document.addEventListener('DOMContentLoaded', function() {
             //TODO настроить ресайз окна для жуков
             const bagContainer = document.getElementById('bugContainer');
             bagContainer.style.width = cw + "px";
-            bagContainer.style.height = cw + Math.floor((cw * stage.h) / stage.w) + "px";
+            bagContainer.style.height = Math.floor((cw * stage.h) / stage.w) + "px";
             // _pexcanvas.style.marginLeft = loffset + "px";
             // _pexcanvas.style.marginTop = toffset + "px";
         } else {
