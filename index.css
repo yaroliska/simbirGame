@@ -42,6 +42,13 @@ canvas {
     transform: rotate(1deg) translate(95px, 82px);
 }
 
+#simbirsoft {
+    transform: translate(63px, 83px);
+}
+#simbirsoft2{
+    transform: translate(61px, 117px);
+}
+
 #lifeAndCounter{
     position: absolute;
 }
@@ -54,9 +61,10 @@ canvas {
     display: flex;
     justify-content: center;
     position: relative;
-    /* overflow: hidden;
-    height: 100vh;
-    width: 100vw; */
+    background-color: #dde2e4;
+    overflow: hidden;
+    /*height: 100vh;*/
+    /*width: 100vw; *!*/
 }
 
 * {
@@ -70,9 +78,9 @@ canvas {
     --fur: #8a420f;
     --fur-light: #b8672e;
     --muzzle: #e6b999;
-    --tank: #d9d9d9;
+    --tank: #004A9D;
     --nose: #0d0d0d;
-    --bandana: #f20d0d;
+    --bandana: #004A9D;
     --keyboard-body: #404040;
     --keyboard-key: #8c8c8c;
     --keyboard-accent: #7359a6;
@@ -266,7 +274,7 @@ label svg:nth-of-type(1) {
 .welcome{
     position: absolute;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     z-index: 1;
     background-color: #dde2e4;
 }
