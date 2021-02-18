@@ -681,6 +681,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const lifeAndCounter = document.getElementById('lifeAndCounter');
             lifeAndCounter.style.height = Math.floor((cw * stage.h) / stage.w) + "px";
             lifeAndCounter.style.width = cw + "px";
+
+            const statisticContainer = document.getElementById('statisticContainer');
+            statisticContainer.style.height = Math.floor((cw * stage.h) / stage.w) + "px";
+
             // _pexcanvas.style.marginLeft = loffset + "px";
             // _pexcanvas.style.marginTop = toffset + "px";
         } else {
@@ -702,6 +706,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const lifeAndCounter = document.getElementById('lifeAndCounter');
             lifeAndCounter.style.height = ch + "px";
             lifeAndCounter.style.width = Math.floor((ch * stage.w) / stage.h) + "px";
+
+            const statisticContainer = document.getElementById('statisticContainer');
+            statisticContainer.style.height = ch + "px";
             // _pexcanvas.style.marginLeft = loffset + "px";
             // _pexcanvas.style.marginTop = toffset + "px";
         }
