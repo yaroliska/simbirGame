@@ -2,6 +2,7 @@ body {
     background: #000000;
     margin: 0;
     padding: 0;
+    font-family: "Arial";
 }
 
 canvas {
@@ -12,6 +13,19 @@ canvas {
     position: absolute;
     bottom: -52px;
     transform: translateX(-95px);
+}
+
+#bearSvg.welcome-bear{
+    z-index: 1;
+    transform: scale(-1, 1);
+}
+#bearSvg.welcome-bear #forearm-group{
+    z-index: 1;
+    transform: rotate(-14deg) translate(62px, 80px);
+    animation: waving 1.8s linear infinite;
+}
+#bearSvg.welcome-bear #shoulder-arm {
+    transform: rotate(-25deg) translate(95px, 82px);
 }
 
 #forearm-group {
@@ -32,6 +46,9 @@ canvas {
     display: flex;
     justify-content: center;
     position: relative;
+    /* overflow: hidden;
+    height: 100vh;
+    width: 100vw; */
 }
 
 * {
@@ -158,7 +175,7 @@ label svg:nth-of-type(1) {
     display: none;
 }
 .statistics{
-    display: none;
+    text-align: center;
     position: absolute;
     top: 0;
     left: 0;
@@ -174,12 +191,40 @@ label svg:nth-of-type(1) {
     width: 50%;
     min-width: 320px;
     margin: auto;
-    padding: 50px 30px;
+    padding: 30px;
     background-color: #ffffff;
     box-sizing: border-box;
+    border-radius: 30px;
+    letter-spacing: .1em;
 }
-.statistics h1{
-    margin-top: 0;
+.statistics img{
+    width: 100%;
+    animation: blinker 1.8s linear infinite;
+}
+.statistics button{
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all .35s cubic-bezier(.1, 0, 0, 1);
+    border-radius: 6px;
+    padding: 15px 20px;
+    box-shadow: inset 0 0 0 rgba(0, 0, 0, 0), 0 0 0 rgba(0, 0, 0, 0);
+    letter-spacing: inherit;
+    text-shadow: 0 0 rgba(0, 0, 0, 0);
+    background: #FF3149;
+    border: none;
+    outline: none;
+    color: #ffffff;
+}
+
+.statistics button:hover {
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .1), 0 4px 8px rgba(0, 0, 0, .2);
+  transform: scale(1.06);
+  text-shadow: 0 -1px rgba(0, 0, 0, .1);
+}
+
+.statistics button:active {
+  transform: scale(0.98);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .2), 0 1px 3px rgba(0, 0, 0, .3);
 }
 
 
@@ -209,3 +254,59 @@ label svg:nth-of-type(1) {
     margin: 0;
 }
 
+
+.welcome{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    background-color: #dde2e4;
+}
+.welcome__slogan{
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    bottom: 124px;
+    left: 50%;
+    z-index: 1;
+}
+.welcome__slogan:hover,
+.welcome__slogan:focus{
+    transform: scale(1.1);
+    outline: none;
+}
+.welcome__slogan img{
+    height: auto;
+    width: 15vw;
+    min-width: 200px;
+    animation: balloonshake 1.2s  cubic-bezier(.36,.07,.19,.97) infinite both;
+}
+
+.hidden{
+    display: none;
+}
+
+@keyframes balloonshake {
+    0% { transform: rotate(0); }
+    15% { transform: rotate(5deg); }
+    30% { transform: rotate(-5deg); }
+    45% { transform: rotate(4deg); }
+    60% { transform: rotate(-4deg); }
+    75% { transform: rotate(2deg); }
+    85% { transform: rotate(-2deg); }
+    92% { transform: rotate(1deg); }
+    100% { transform: rotate(0); }
+}
+@keyframes blinker {
+    50% {
+      opacity: .1;
+    }
+}
+@keyframes waving {
+    50% {
+        transform: rotate(10deg) translate(103px, 41px);
+    }
+}

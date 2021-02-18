@@ -27,12 +27,17 @@ document.addEventListener('DOMContentLoaded', function() {
     let mxpos = 0;
     let mypos = 0;
 
+    const bearSvg = document.getElementById("bearSvg");
+
     // Статистика -----------------------------------------------
     let missCounter = 0;
     let killCounter = 0;
     let isGameOver = false;
-    const MAX_MISS = 10;
+    const MAX_MISS = 1;
     const life = [];
+    
+    const audioGameOver = new Audio('gameover.mp3');
+    const audioMiss = new Audio('miss.mp3');
 
     const statisticsModal = document.querySelector('.statistics');
     const statisticsSpan = document.querySelector('.statistics span');
@@ -53,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
         missCounter = 0;
         killCounter = 0;
         counter.textContent = killCounter;
-        lifeRow.forEach(el => el.classList.remove("lost"));
+        lifeRow.forEach(el => el.classList.remove("hidden"));
         bullets = [];
         enemies = [];
         setEnemies();
@@ -63,7 +68,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Удар по игроку
     function getMiss(){
-        lifeRow[missCounter]?.classList.add("lost")
+        audioMiss.play();
+        lifeRow[missCounter]?.classList.add("hidden")
         missCounter++;
         checkIfGameOver();
     }
@@ -77,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Остановка при потере всех жизней
     function checkIfGameOver(){
         if (missCounter === MAX_MISS){
+            audioGameOver.play();
             isGameOver = true;
             statisticsSpan.textContent = killCounter;
             statisticsModal.classList.add("active");
@@ -419,7 +426,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // debugger;
             // console.log(radToDeg(angle));
             // transformOrigin.style.transform = "rotate(" + radToDeg(angle) + "deg)";
-            const bearSvg = document.getElementById("bearSvg");
             const bearLeftShoulder = document.getElementById("shoulder-arm");
             const forearmGroup = document.getElementById("forearm-group");
             forearmGroup.style.display = "block";
@@ -618,8 +624,11 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener(
         "touchstart",
         function (e) {
-            e.preventDefault();
-            motchstart(e.touches[0]);
+            // отделяет взаимодействие с кнопками начала игры
+            if(!e.target.classList.contains("btn")){
+                e.preventDefault();
+                motchstart(e.touches[0]);
+            }
         },
         false
     );
@@ -634,8 +643,11 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener(
         "touchend",
         function (e) {
-            e.preventDefault();
-            motchend(e.touches[0]);
+            // отделяет взаимодействие с кнопками начала игры
+            if(!e.target.classList.contains("btn")){
+                e.preventDefault();
+                motchend(e.touches[0]);
+            }
         },
         false
     );
@@ -717,5 +729,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     _pexresize();
-    animated();
+    
+    const welcomeModal = document.querySelector('.welcome');
+    welcomeModal.querySelector('.welcome__slogan').addEventListener('click', function(){
+        welcomeModal.classList.add('hidden');
+        bearSvg.classList.remove('welcome-bear')
+        animated();
+    });
 }, false);
