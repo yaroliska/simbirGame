@@ -1,5 +1,3 @@
-
-
 document.addEventListener('DOMContentLoaded', function() {
     const audioGameOver = new Audio('gameover.mp3');
     const audioMiss = new Audio('miss.mp3');
@@ -8,19 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     let cw = window.innerWidth;
     let ch = window.innerHeight;
-
-    const tree = document.querySelector('.tree');
-    for (let i = 0; i < 30; i++) {
-        const clone = tree.cloneNode(true);
-        clone.style.bottom = `${random(-40, -10)}%`;
-        clone.style.left = `${random(cw * 0.8 , null, true)}px`;
-        clone.style.transform = `scale(${random(100, 50)/ 100}) scaleX(${random() > 0.5 ? -1 : 1})`;
-        document.querySelector('.tree-row').appendChild(clone);
-    }
-    
-    function random (max = 1, min = 0,  unsigned = false) {
-        return unsigned ? ((Math.random() - 0.5) * 2) * max : Math.floor(Math.random() * (max - min)) + min;
-    };
 
     const BULLET_SPEED = 18;
     const BUGS_SPEED = 2;
@@ -44,13 +29,27 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     let scale = 1;
-    let portrait = true;
     let loffset = 0;
     let toffset = 0;
     let mxpos = 0;
     let mypos = 0;
 
     const bearSvg = document.getElementById("bearSvg");
+    const bugContainer = document.getElementById('bugContainer');
+
+    // Садим деревья------------------------------
+    const tree = document.querySelector('.tree');
+    for (let i = 0; i < 30; i++) {
+        const clone = tree.cloneNode(true);
+        clone.style.bottom = `${random(-40, -10)}%`;
+        clone.style.left = `${random(cw * 0.8 , null, true)}px`;
+        clone.style.transform = `scale(${random(100, 50)/ 100}) scaleX(${random() > 0.5 ? -1 : 1})`;
+        document.querySelector('.tree-row').appendChild(clone);
+    }
+    
+    function random (max = 1, min = 0,  unsigned = false) {
+        return unsigned ? ((Math.random() - 0.5) * 2) * max : Math.floor(Math.random() * (max - min)) + min;
+    };
 
     // Статистика -----------------------------------------------
     let missCounter = 0;
@@ -188,7 +187,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 newBug.style.transform = move;
                 // добавили в контейнер
-                const bugContainer = document.getElementById('bugContainer');
                 bugContainer.appendChild(newBug);
             }
         }
@@ -201,20 +199,6 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.fillStyle = color;
         ctx.fillText("< / >", dx, dy);
     }
-
-// очистили контекст перед началом работы
-    ctx.clearRect(0, 0, stage.w, stage.h);
-
-// сохраняет изображение (красных стрелок)
-    const explode = new Image();
-    explode.src = _pexcanvas.toDataURL("image/png");
-
-// очищаем контекст
-    ctx.clearRect(0, 0, stage.w, stage.h);
-
-// сохраняет  серые стрелки в img
-    const explodeb = new Image();
-    explodeb.src = _pexcanvas.toDataURL("image/png");
 
 // очистили контекст
     ctx.clearRect(0, 0, stage.w, stage.h);
@@ -250,9 +234,6 @@ document.addEventListener('DOMContentLoaded', function() {
             enemies[i].y += Math.cos(enemies[i].r) * 300;
         }
     }
-
-
-// взрывы
 
     // let eturn = 0;
     // const cold = [];
@@ -551,20 +532,20 @@ document.addEventListener('DOMContentLoaded', function() {
         cw = window.innerWidth;
         ch = window.innerHeight;
         if (cw <= (ch * stage.w) / stage.h) {
-            portrait = true;
             scale = stage.w / cw;
             loffset = 0;
             toffset = Math.floor(ch - (cw * stage.h) / stage.w) / 2;
-            _pexcanvas.style.width = cw + "px";
-            _pexcanvas.style.height = Math.floor((cw * stage.h) / stage.w) + "px";
+            const height = Math.floor((cw * stage.h) / stage.w);
 
-            const bagContainer = document.getElementById('bugContainer');
-            bagContainer.style.width = cw + "px";
-            bagContainer.style.height = Math.floor((cw * stage.h) / stage.w) + "px";
+            _pexcanvas.style.width = cw + "px";
+            _pexcanvas.style.height = height + "px";
+
+            bugContainer.style.width = cw + "px";
+            bugContainer.style.height = height + "px";
 
             const welcomeContainer = document.getElementById('welcomeContainer');
             welcomeContainer.style.width = cw + "px";
-            welcomeContainer.style.height = Math.floor((cw * stage.h) / stage.w) + "px";
+            welcomeContainer.style.height = height + "px";
 
             const story = document.getElementById('story');
             story.style.width = 960/scale + "px";
@@ -573,19 +554,18 @@ document.addEventListener('DOMContentLoaded', function() {
             // _pexcanvas.style.marginTop = toffset + "px";
         } else {
             scale = stage.h / ch;
-            portrait = false;
             loffset = Math.floor(cw - (ch * stage.w) / stage.h) / 2;
             toffset = 0;
+            const width =Math.floor((ch * stage.w) / stage.h);
             _pexcanvas.style.height = ch + "px";
-            _pexcanvas.style.width = Math.floor((ch * stage.w) / stage.h) + "px";
+            _pexcanvas.style.width = width + "px";
 
-            const bagContainer = document.getElementById('bugContainer');
-            bagContainer.style.height = ch + "px";
-            bagContainer.style.width = Math.floor((ch * stage.w) / stage.h) + "px";
+            bugContainer.style.height = ch + "px";
+            bugContainer.style.width = width + "px";
 
             const welcomeContainer = document.getElementById('welcomeContainer');
             welcomeContainer.style.height = ch + "px";
-            welcomeContainer.style.width = Math.floor((ch * stage.w) / stage.h) + "px";
+            welcomeContainer.style.width = width + "px";
 
             const story = document.getElementById('story');
             story.style.width = 960/scale + "px";
@@ -608,9 +588,6 @@ document.addEventListener('DOMContentLoaded', function() {
         );
     })();
 
-
-    // let trax;
-    // let tray;
     function animated() {
         requestAnimationFrame(animated);
         if(!isGameOver){
@@ -636,7 +613,7 @@ document.addEventListener('DOMContentLoaded', function() {
         audioShoot.loop = true;
         audioShoot.play();
     });
-    window.onresize = function(event) {
+    window.onresize = function() {
         _pexresize();
     };
 }, false);

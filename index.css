@@ -157,9 +157,6 @@ svg {
 .bear__arm_left {
     transform: translateX(-61px);
 }
-.code-block {
-    /*fill: hsl(var(--hue), 100%, 50%);*/
-}
 label {
     height: 44px;
     width: 44px;
@@ -216,7 +213,8 @@ label svg:nth-of-type(1) {
     width: 100%;
     animation: blinker 1.8s linear infinite;
 }
-.statistics button{
+.statistics button,
+.counter{
     font-size: 1.1rem;
     cursor: pointer;
     transition: all .35s cubic-bezier(.1, 0, 0, 1);
@@ -257,6 +255,7 @@ label svg:nth-of-type(1) {
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .life{
@@ -280,8 +279,9 @@ label svg:nth-of-type(1) {
     font-size: 1.5em;
     font-weight: bold;
     margin: 0;
+    padding: 10px 15px;
+    cursor: initial;
 }
-
 
 .welcome{
     position: absolute;
@@ -352,23 +352,25 @@ label svg:nth-of-type(1) {
     }
     .header__wrap{
         flex-direction: column-reverse;
+        align-items: flex-end;
     }
     .life{
         max-width: 100%;
-        flex-wrap: wrap;
+        margin-bottom: 10px;
     }
     .life__item{
         margin-left: 0;
         margin-right: 5px;
     }
     .counter{   
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 }
 @media (max-width: 620px) {
     .life__item{
         width: 30px;
         height: 30px;
+        margin-right: 0;
     }
     .statistics__modal{
         padding: 10px;
