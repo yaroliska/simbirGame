@@ -65,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const statisticsBtn = statisticsModal.querySelector('button');
     const lifeRowBlock = document.querySelector('.life');
     const counter = document.querySelector('.counter span');
-    const lifeAndCounter = document.getElementById('lifeAndCounter');
 
     // Подготовка блока с жизнями
     for (let i = 0; i < MAX_MISS; i++) {
@@ -81,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
         killCounter = 0;
         currentBugsSpeed = BUGS_SPEED;
         counter.textContent = killCounter;
-        lifeRow.forEach(el => el.classList.remove("hidden"));
+        lifeRow.forEach(el => el.classList.remove("lost"));
         bullets = [];
         enemies = [];
         setEnemies();
@@ -93,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Удар по игроку
     function getMiss(){
         audioMiss.play();
-        lifeRow[missCounter]?.classList.add("hidden")
+        lifeRow[missCounter]?.classList.add("lost")
         missCounter++;
         checkIfGameOver();
     }
@@ -567,9 +566,6 @@ document.addEventListener('DOMContentLoaded', function() {
             welcomeContainer.style.width = cw + "px";
             welcomeContainer.style.height = Math.floor((cw * stage.h) / stage.w) + "px";
 
-            lifeAndCounter.style.height = Math.floor((cw * stage.h) / stage.w) + "px";
-            lifeAndCounter.style.width = cw + "px";
-
             const statisticContainer = document.getElementById('statisticContainer');
             statisticContainer.style.height = Math.floor((cw * stage.h) / stage.w) + "px";
 
@@ -593,9 +589,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const welcomeContainer = document.getElementById('welcomeContainer');
             welcomeContainer.style.height = ch + "px";
             welcomeContainer.style.width = Math.floor((ch * stage.w) / stage.h) + "px";
-
-            lifeAndCounter.style.height = ch + "px";
-            lifeAndCounter.style.width = Math.floor((ch * stage.w) / stage.h) + "px";
 
             const statisticContainer = document.getElementById('statisticContainer');
             statisticContainer.style.height = ch + "px";
@@ -643,8 +636,8 @@ document.addEventListener('DOMContentLoaded', function() {
         audioBg.loop = true; 
         audioBg.play();
         welcomeModal.classList.add('hidden');
+        document.querySelector('.header').classList.remove("hidden");
         bearSvg.classList.remove('welcome-bear');
-        lifeAndCounter.classList.remove("hidden");
         animated();
         audioShoot.loop = true;
         audioShoot.play();
