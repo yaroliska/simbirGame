@@ -2,6 +2,8 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     const BULLET_SPEED = 18;
+    const BUGS_SPEED = 2;
+    let currentBugsSpeed = BUGS_SPEED;
     const stage = {
         w: 1280,
         h: 720
@@ -32,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Статистика -----------------------------------------------
     let missCounter = 0;
     let killCounter = 0;
+    let prevkillCounter = 0;
     let isGameOver = false;
     const MAX_MISS = 10;
     const life = [];
@@ -57,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         statisticsModal.classList.remove("active");
         missCounter = 0;
         killCounter = 0;
+        currentBugsSpeed = BUGS_SPEED;
         counter.textContent = killCounter;
         lifeRow.forEach(el => el.classList.remove("hidden"));
         bullets = [];
@@ -74,11 +78,20 @@ document.addEventListener('DOMContentLoaded', function() {
         checkIfGameOver();
     }
 
+    // увеличение скорости жуков
+   const increaseSpeed = () => {
+        currentBugsSpeed+=(currentBugsSpeed/100)*10;
+    }
+
     // Удар по багу
     function getHit(){
+        if (Math.floor(killCounter/30) > prevkillCounter) {
+            prevkillCounter = Math.floor(killCounter/30);
+            increaseSpeed();
+        }
         killCounter++;
         counter.textContent = killCounter;
-    }
+    };
 
     // Остановка при потере всех жизней
     function checkIfGameOver(){
@@ -320,8 +333,8 @@ document.addEventListener('DOMContentLoaded', function() {
         this.ty = ty;
     }
 
-    let eturn = 0;
-    const cold = [];
+    // let eturn = 0;
+    // const cold = [];
     function enginestep() {
         // рисуем бэк
         ctx.drawImage(back, 0, 0);
@@ -352,10 +365,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // рисуем красные стрелки изменяя текущий массив
+        // рисуем врагов
         for (let i = 0; i < enemies.length; i++) {
-            enemies[i].x += Math.sin(enemies[i].r) * 2;
-            enemies[i].y += Math.cos(enemies[i].r) * 2;
+            enemies[i].x += Math.sin(enemies[i].r) * currentBugsSpeed;
+            enemies[i].y += Math.cos(enemies[i].r) * currentBugsSpeed;
             // drawArrow(
             //     enemies[i].x - Math.sin(enemies[i].r) * 100,
             //     enemies[i].y - Math.cos(enemies[i].r) * 100,
@@ -394,21 +407,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // если нет курсора, то автоматическая стрельба
         if (ai) {
-            for (let l = 0; l < enemies.length; l++) {
-                const dx = enemies[l].x - stage.w / 2;
-                const dy = enemies[l].y - stage.h;
-                const dis = Math.floor(Math.sqrt(dx * dx + dy * dy));
-                const val1 = 10000 + dis;
-                const val2 = 1000 + l;
-                cold[l] = val1 + "x" + val2;
-            }
-
-            cold.sort();
-            eturn = parseInt(cold[0].slice(8, 11));
-            // функция рандомной стрельбы
-            if (parseInt(cold[0].slice(1, 6)) < 800) {
-                angle += (enemies[eturn].r - angle) / 8;
-            }
+            // for (let l = 0; l < enemies.length; l++) {
+            //     const dx = enemies[l].x - stage.w / 2;
+            //     const dy = enemies[l].y - stage.h;
+            //     const dis = Math.floor(Math.sqrt(dx * dx + dy * dy));
+            //     const val1 = 10000 + dis;
+            //     const val2 = 1000 + l;
+            //     cold[l] = val1 + "x" + val2;
+            // }
+            //
+            // cold.sort();
+            // eturn = parseInt(cold[0].slice(8, 11));
+            // // функция рандомной стрельбы
+            // if (parseInt(cold[0].slice(1, 6)) < 800) {
+            //     angle += (enemies[eturn].r - angle) / 8;
+            // }
         } else {
             // если есть курсор
             const dx = pointer.x - stage.w / 2;
@@ -421,9 +434,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const keyboardWithArms = document.getElementsByClassName(
                 "bear__keyboard-arm"
             )[0];
-            // debugger;
-            // console.log(radToDeg(angle));
-            // transformOrigin.style.transform = "rotate(" + radToDeg(angle) + "deg)";
             const logo = document.getElementById('simbirsoft');
             const logo2 = document.getElementById('simbirsoft2');
             const bearSvg = document.getElementById("bearSvg");
@@ -440,7 +450,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 bearLeftShoulder.style.transform = `rotate(${
                     -radToDeg(angle) * 2.3 + 20
                 }deg) translate(95px, 82px)`;
-                // console.log(radToDeg(angle));
                 logo.style.transform = `translate(63px, 83px) scale(1, 1)`;
                 logo2.style.transform = `translate(61px, 117px) scale(1, 1)`;
                 if (radToDeg(angle) < 13) {
@@ -480,8 +489,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 bearLeftShoulder.style.transform = `rotate(${
                     radToDeg(angle) * 2.3 + 20
                 }deg) translate(95px, 82px)`;
-                // console.log(radToDeg(angle));
-
                 if (radToDeg(angle) > -13) {
                     forearmGroup.style.transformOrigin = "150px 200px";
                     forearmGroup.style.transform = `rotate(${
@@ -676,7 +683,6 @@ document.addEventListener('DOMContentLoaded', function() {
             _pexcanvas.style.width = cw + "px";
             _pexcanvas.style.height = Math.floor((cw * stage.h) / stage.w) + "px";
 
-            //TODO настроить ресайз окна для жуков
             const bagContainer = document.getElementById('bugContainer');
             bagContainer.style.width = cw + "px";
             bagContainer.style.height = Math.floor((cw * stage.h) / stage.w) + "px";
