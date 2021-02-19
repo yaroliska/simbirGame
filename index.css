@@ -113,6 +113,17 @@ svg {
     position: absolute;
     z-index: 2;
 }
+
+#powsRight{
+    transform-origin: 100% 50%;
+    animation: movesRight .8s linear infinite;
+}
+
+#pawsLeft{
+    transform-origin: 0 50%;
+    animation: movesLeft .8s linear infinite;
+}
+
 .bear__jeans {
     fill: var(--jeans);
 }
@@ -409,5 +420,27 @@ label svg:nth-of-type(1) {
 @keyframes waving {
     50% {
         transform: rotate(10deg) translate(103px, 41px);
+    }
+}
+@keyframes movesRight {
+    25% {
+        transform: rotate(5deg);
+    }
+    50%{
+        transform: rotate(0deg); 
+    }
+    75% {
+        transform: rotate(-5deg);
+    }
+}
+@keyframes movesLeft {
+    25% {
+        transform: rotate(5deg);
+    }
+    50%{
+        transform: rotate(0deg); 
+    }
+    75% {
+        transform: rotate(-5deg);
     }
 }
