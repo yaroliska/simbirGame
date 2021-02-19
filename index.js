@@ -482,7 +482,6 @@ document.addEventListener('DOMContentLoaded', function() {
         "mousemove",
         function (e) {
             motchmove(e);
-            // console.log(e.clientX, e.clientY);
         },
         false
     );
@@ -496,18 +495,13 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener(
         "touchstart",
         function (e) {
-            // отделяет взаимодействие с кнопками начала игры
-            if(!e.target.classList.contains("btn")){
-                e.preventDefault();
-                motchstart(e.touches[0]);
-            }
+            motchstart(e.touches[0]);
         },
         false
     );
     window.addEventListener(
         "touchmove",
         function (e) {
-            e.preventDefault();
             motchmove(e.touches[0]);
         },
         false
@@ -515,11 +509,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener(
         "touchend",
         function (e) {
-            // отделяет взаимодействие с кнопками начала игры
-            if(!e.target.classList.contains("btn")){
-                e.preventDefault();
-                motchend(e.touches[0]);
-            }
+            motchend(e.touches[0]);
         },
         false
     );
