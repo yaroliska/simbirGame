@@ -328,6 +328,15 @@ label svg:nth-of-type(1) {
     animation: balloonshake 1.2s  cubic-bezier(.36,.07,.19,.97) infinite both;
 }
 
+.tree {
+    position: absolute;
+    z-index: 50;
+    display: inline;
+}
+.tree-row .hidden{
+    display: block;
+}
+
 .hidden{
     display: none;
 }

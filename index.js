@@ -5,6 +5,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const audioMiss = new Audio('miss.mp3');
     const audioShoot = new Audio('shoot.mp3');
     const audioKombat = new Audio('soldat.mp3');
+    
+    const cw = window.innerWidth;
+    const ch = window.innerHeight;
+
+    const treeRow = [];
+    const tree = document.querySelector('.tree');
+    for (let i = 0; i < 30; i++) {
+        const clone = tree.cloneNode(true);
+        clone.style.top = `${random(40) + 30}%`;
+        clone.style.left = `${random(cw * 0.7, true)}px`;
+        clone.style.transform = `scale(${random(0.5) + 0.5}) scaleX(${random() > 0.5 ? -1 : 1})`;
+        document.querySelector('.tree-row').appendChild(clone);
+    }
+    console.log(treeRow);
+    
+    function random (max = 1, unsigned = false) {
+        return unsigned ? ((Math.random() - 0.5) * 2) * max : Math.random() * max;
+    };
 
     const BULLET_SPEED = 18;
     const BUGS_SPEED = 2;
@@ -677,8 +695,6 @@ document.addEventListener('DOMContentLoaded', function() {
 // ------------------------------------------------------------------------ stager
 // ------------------------------------------------------------------------ stager
     function _pexresize() {
-        const cw = window.innerWidth;
-        const ch = window.innerHeight;
         if (cw <= (ch * stage.w) / stage.h) {
             portrait = true;
             scale = stage.w / cw;
