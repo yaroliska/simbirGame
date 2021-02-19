@@ -698,6 +698,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const statisticContainer = document.getElementById('statisticContainer');
             statisticContainer.style.height = Math.floor((cw * stage.h) / stage.w) + "px";
 
+            const story = document.getElementById('story');
+            story.style.width = 960/scale + "px";
+
             // _pexcanvas.style.marginLeft = loffset + "px";
             // _pexcanvas.style.marginTop = toffset + "px";
         } else {
@@ -722,6 +725,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const statisticContainer = document.getElementById('statisticContainer');
             statisticContainer.style.height = ch + "px";
+
+            const story = document.getElementById('story');
+            story.style.width = 960/scale + "px";
+
             // _pexcanvas.style.marginLeft = loffset + "px";
             // _pexcanvas.style.marginTop = toffset + "px";
         }
