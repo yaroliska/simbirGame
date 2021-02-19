@@ -5,6 +5,11 @@ body {
     font-family: "Arial";
 }
 
+canvas{
+    position: relative;
+    z-index: 2;
+}
+
 #bearSvg {
     position: absolute;
     bottom: -52px;
@@ -54,50 +59,16 @@ body {
 #storyText{
     display: none;
 }
-@media (max-width: 1060px) {
-    #story {
-        width: 640px !important;
-        left: 5%;
-    }
-}
-@media (max-width: 934px) {
-    #story {
-        display: none;
-    }
-    #storyText{
-        display: block;
-        color: #004A9D;
-        background: white;
-        padding: 5px 10px 5px 10px;
-        border-radius: 10px;
-        margin: 20px 25px 20px 25px;
-    }
-}
 
 .allContent{
-    width: 100vw;
-    height: 100vh;
     background-color: #dde2e4;
 }
 .container {
     display: flex;
     justify-content: center;
     position: relative;
-    background-color: #dde2e4;
     overflow: hidden;
-    /*height: 100vh;*/
-    /*width: 100vw; *!*/
-    background: radial-gradient(70.41% 100% at 50% 0%, #7c8e8a 0%, #25333e 100%)
-}
-
-.container::before{
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100vw;
-    height: 16px;
-    background-color: #000000;
+    background: linear-gradient(0deg, rgb(0 0 0) 16px, rgba(255,255,255,0) 20px, rgba(255,255,255,0) 100%), radial-gradient(70.41% 100% at 50% 0%, #7c8e8a 0%, #25333e 100%)
 }
 
 * {
@@ -221,17 +192,15 @@ label svg:nth-of-type(1) {
     display: none;
 }
 .statistics{
+    display: flex;
     text-align: center;
     position: absolute;
     top: 0;
     left: 0;
-    height: 100vh;
+    height: 100%;
     width: 100vw;
     z-index: 5;
     background-color: rgba(0,0,0, .5);
-}
-.statistics.active{
-    display: flex;
 }
 .statistics__modal{
     width: 50%;
@@ -273,28 +242,41 @@ label svg:nth-of-type(1) {
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .2), 0 1px 3px rgba(0, 0, 0, .3);
 }
 
+.header{
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+}
+.header__wrap{
+    max-width: 1280px;
+    flex-grow: 1;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+}
 
 .life{
-    position: absolute;
-    right: 20px;
-    top: 10px;
     display: flex;
+    max-width: 50%;
 }
 .life__item{
     width: 40px;
     height: 40px;
     margin-left: 10px;
+    background-repeat: no-repeat;
     background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNDEyLjczNSA0MTIuNzM1IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0MTIuNzM1IDQxMi43MzU7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KCTxwYXRoIHN0eWxlPSJmaWxsOiNENzQ0M0U7IiBkPSJNMjk1LjcwNiw0Ni4wNThDMzU0LjQ1LDQ2LjM0NCw0MDIsOTMuODk0LDQwMi4yODYsMTUyLjYzOA0KCQljMCwxMDcuNjI0LTE5NS45MTgsMjE0LjIwNC0xOTUuOTE4LDIxNC4yMDRTMTAuNDQ5LDI1OC42OTUsMTAuNDQ5LDE1Mi42MzhjMC01OC44NjIsNDcuNzE3LTEwNi41OCwxMDYuNTgtMTA2LjU4bDAsMA0KCQljMzYuMDMyLTAuMjgxLDY5LjcxOCwxNy44NDIsODkuMzM5LDQ4LjA2NUMyMjYuMTIzLDY0LjA0NywyNTkuNzIyLDQ1Ljk3MSwyOTUuNzA2LDQ2LjA1OHoiLz4NCgk8cGF0aCBzdHlsZT0iZmlsbDojMDgzODYzOyIgZD0iTTIwNi4zNjcsMzc3LjI5MWMtMS44NTQtMC4wMjQtMy42NjQtMC41NjctNS4yMjQtMS41NjdDMTkzLjMwNiwzNzEuNTQ0LDAsMjYzLjM5NywwLDE1Mi42MzgNCgkJQzAsODguMDA1LDUyLjM5NSwzNS42MDksMTE3LjAyOSwzNS42MDlsMCwwYzM0LjQ3Ny0wLjQwNiw2Ny4yOTksMTQuNzU3LDg5LjMzOSw0MS4yNzMNCgkJYzQxLjc0OS00OS4zNDEsMTE1LjU5MS01NS40OTUsMTY0LjkzMi0xMy43NDZjMjYuMzIzLDIyLjI3Myw0MS40ODQsNTUuMDIsNDEuNDM2LDg5LjUwMQ0KCQljMCwxMTIuMzI3LTE5My4zMDYsMjE4LjkwNi0yMDEuMTQzLDIyMy4wODZDMjEwLjAzMSwzNzYuNzIzLDIwOC4yMjEsMzc3LjI2NiwyMDYuMzY3LDM3Ny4yOTF6IE0xMTcuMDI5LDU2LjUwNw0KCQljLTUzLjA5MSwwLTk2LjEzMSw0My4wMzktOTYuMTMxLDk2LjEzMWwwLDBjMCw4OS44NjEsMTU1LjE2NywxODQuNDI0LDE4NS40NjksMjAyLjE4OA0KCQljMzAuMzAyLTE3LjI0MSwxODUuNDY5LTExMS4yODIsMTg1LjQ2OS0yMDIuMTg4YzAuMDg3LTUzLjA5MS00Mi44ODEtOTYuMjAxLTk1Ljk3Mi05Ni4yODkNCgkJYy0zMi41MDEtMC4wNTMtNjIuODI5LDE2LjMxOS04MC42MTUsNDMuNTIxYy0zLjU1Nyw0LjkwNS0xMC40MTgsNS45OTgtMTUuMzIzLDIuNDRjLTAuOTM3LTAuNjgtMS43NjEtMS41MDMtMi40NC0yLjQ0DQoJCUMxNzkuOTY3LDcyLjQ3OSwxNDkuNTQxLDU2LjA4LDExNy4wMjksNTYuNTA3eiIvPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPC9zdmc+DQo=");
-    opacity: 1;
-}
+    flex-grow: 0;
+    transition: transform .3s ease-out;
+} 
 .life__item.lost{
-    opacity: 0;
+    transform: scale(0);
 }
 
 .counter{
-    position: absolute;
-    top: 10px;
-    left: 20px;
     font-size: 1.5em;
     font-weight: bold;
     margin: 0;
@@ -330,9 +312,8 @@ label svg:nth-of-type(1) {
 
 .tree {
     position: absolute;
-}
-.tree-row .hidden{
-    display: block;
+    bottom: -30%; 
+    left: 0; 
 }
 .tree-row{
     position: relative;
@@ -342,6 +323,63 @@ label svg:nth-of-type(1) {
 
 .hidden{
     display: none;
+}
+
+
+@media (max-width: 1060px) {
+    #story {
+        width: 640px !important;
+        left: 5%;
+    }
+    .life__item{
+        margin-left: 5px;
+    }
+}
+@media (max-width: 934px) {
+    #story {
+        display: none;
+    }
+    #storyText{
+        display: block;
+        color: #004A9D;
+        background: white;
+        padding: 5px 10px 5px 10px;
+        border-radius: 10px;
+        margin: 20px 25px 20px 25px;
+    }
+    .allContent{
+        padding-bottom: 1px;
+    }
+    .header__wrap{
+        flex-direction: column-reverse;
+    }
+    .life{
+        max-width: 100%;
+        flex-wrap: wrap;
+    }
+    .life__item{
+        margin-left: 0;
+        margin-right: 5px;
+    }
+    .counter{   
+        font-size: 1.2rem;
+    }
+}
+@media (max-width: 620px) {
+    .life__item{
+        width: 30px;
+        height: 30px;
+    }
+    .statistics__modal{
+        padding: 10px;
+        border-radius: 10px;
+    }
+    .statistics__modal h2{
+        margin: 10px;
+    }
+    .statistics button{
+        font-size: 1rem;
+    }
 }
 
 @keyframes balloonshake {

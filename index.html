@@ -9,7 +9,7 @@
     <title>23day</title>
 </head>
 <body>
-<div class="allContent">
+<div class="allContent active">
 <div class="container">
     <div class="welcome" id="welcomeContainer">
         <button class="welcome__slogan"><img class="btn" src="balloon.svg"></button>
@@ -160,11 +160,13 @@
             </g>
         </g>
     </svg>
-    <div id="lifeAndCounter" class="hidden">
-        <p class="counter">Счёт: <span>0</span></p>
-        <div class="life"></div>
+    <div class="header hidden" class="hidden">
+        <div class="header__wrap">
+            <p class="counter">Счёт: <span>0</span></p>
+            <div class="life"></div>
+        </div>
     </div>
-    <div class="statistics hidden" id="statisticContainer">
+    <div class="statistics hidden">
         <div class="statistics__modal">
             <img src="game-over.svg">
             <h2>Твой счёт:  <span></span></h2>
@@ -173,9 +175,9 @@
         </div>
     </div>
     
-    <img  class="tree hidden" src="tree.svg">
-    
-    <div class="tree-row"></div>
+    <div class="tree-row">
+        <img  class="tree" src="tree.svg">
+    </div>
 </div>
     <div id="storyText">
         <h3>Мишка-frontовишка попал в беду! </h3>
