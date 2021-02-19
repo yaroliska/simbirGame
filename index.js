@@ -1,6 +1,13 @@
 
 
 document.addEventListener('DOMContentLoaded', function() {
+    const audioGameOver = new Audio('gameover.mp3');
+    const audioMiss = new Audio('miss.mp3');
+    const audioShoot = new Audio('shoot.mp3');
+    const audioKombat = new Audio('kombat.mp3');
+    audioKombat.loop = true; 
+    audioKombat.play();
+
     const BULLET_SPEED = 18;
     const BUGS_SPEED = 2;
     let currentBugsSpeed = BUGS_SPEED;
@@ -39,9 +46,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const MAX_MISS = 10;
     const life = [];
 
-    const audioGameOver = new Audio('gameover.mp3');
-    const audioMiss = new Audio('miss.mp3');
-
     const statisticsModal = document.querySelector('.statistics');
     const statisticsSpan = document.querySelector('.statistics span');
     const statisticsBtn = statisticsModal.querySelector('button');
@@ -67,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
         enemies = [];
         setEnemies();
         ctx.clearRect(0, 0, stage.w, stage.h);
+        audioShoot.play();
         isGameOver = false;
     })
 
@@ -96,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Остановка при потере всех жизней
     function checkIfGameOver(){
         if (missCounter === MAX_MISS){
+            audioShoot.pause();
             audioGameOver.play();
             isGameOver = true;
             statisticsSpan.textContent = killCounter;
@@ -779,5 +785,7 @@ document.addEventListener('DOMContentLoaded', function() {
         welcomeModal.classList.add('hidden');
         bearSvg.classList.remove('welcome-bear')
         animated();
+        audioShoot.loop = true;
+        audioShoot.play();
     });
 }, false);
