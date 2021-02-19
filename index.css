@@ -5,18 +5,14 @@ body {
     font-family: "Arial";
 }
 
-canvas {
-    background: #5cc3dd;
-}
-
 #bearSvg {
     position: absolute;
     bottom: -52px;
     transform: translateX(-95px);
+    z-index: 2;
 }
 
 #bearSvg.welcome-bear{
-    z-index: 1;
     transform: scale(-1, 1);
 }
 #bearSvg.welcome-bear #forearm-group{
@@ -26,9 +22,6 @@ canvas {
 }
 #bearSvg.welcome-bear #shoulder-arm {
     transform: rotate(-25deg) translate(95px, 82px);
-}
-
-#forearm-group {
 }
 
 #forearm {
@@ -94,6 +87,17 @@ canvas {
     overflow: hidden;
     /*height: 100vh;*/
     /*width: 100vw; *!*/
+    background: radial-gradient(70.41% 100% at 50% 0%, #7c8e8a 0%, #25333e 100%)
+}
+
+.container::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 16px;
+    background-color: #000000;
 }
 
 * {
@@ -136,10 +140,7 @@ svg {
 
 #bugContainer{
     position: absolute;
-}
-.ground {
-    --alpha: 0.5;
-    fill: hsla(var(--ground-hue), 60%, 60%, var(--alpha, 1));
+    z-index: 2;
 }
 .bear__jeans {
     fill: var(--jeans);
@@ -226,7 +227,7 @@ label svg:nth-of-type(1) {
     left: 0;
     height: 100vh;
     width: 100vw;
-    z-index: 1;
+    z-index: 5;
     background-color: rgba(0,0,0, .5);
 }
 .statistics.active{
@@ -304,8 +305,7 @@ label svg:nth-of-type(1) {
     position: absolute;
     width: 100vw;
     height: 100%;
-    z-index: 1;
-    background-color: #dde2e4;
+    z-index: 3;
 }
 .welcome__slogan{
     cursor: pointer;
@@ -326,6 +326,18 @@ label svg:nth-of-type(1) {
     width: 15vw;
     min-width: 200px;
     animation: balloonshake 1.2s  cubic-bezier(.36,.07,.19,.97) infinite both;
+}
+
+.tree {
+    position: absolute;
+}
+.tree-row .hidden{
+    display: block;
+}
+.tree-row{
+    position: relative;
+    z-index: 1;
+    opacity: 0.9;
 }
 
 .hidden{

@@ -5,6 +5,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const audioMiss = new Audio('miss.mp3');
     const audioShoot = new Audio('shoot.mp3');
     const audioBg = new Audio('sega.mp3');
+    
+    const cw = window.innerWidth;
+    const ch = window.innerHeight;
+
+    const tree = document.querySelector('.tree');
+    for (let i = 0; i < 30; i++) {
+        const clone = tree.cloneNode(true);
+        clone.style.bottom = `${random(-40, -10)}%`;
+        clone.style.left = `${random(cw * 0.8 , null, true)}px`;
+        clone.style.transform = `scale(${random(100, 50)/ 100}) scaleX(${random() > 0.5 ? -1 : 1})`;
+        document.querySelector('.tree-row').appendChild(clone);
+    }
+    
+    function random (max = 1, min = 0,  unsigned = false) {
+        return unsigned ? ((Math.random() - 0.5) * 2) * max : Math.floor(Math.random() * (max - min)) + min;
+    };
 
     const BULLET_SPEED = 18;
     const BUGS_SPEED = 2;
@@ -49,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const statisticsBtn = statisticsModal.querySelector('button');
     const lifeRowBlock = document.querySelector('.life');
     const counter = document.querySelector('.counter span');
+    const lifeAndCounter = document.getElementById('lifeAndCounter');
 
     // Подготовка блока с жизнями
     for (let i = 0; i < MAX_MISS; i++) {
@@ -203,9 +220,6 @@ document.addEventListener('DOMContentLoaded', function() {
 // очистили контекст
     ctx.clearRect(0, 0, stage.w, stage.h);
 
-    ctx.fillStyle = "rgba(236,240,241,0.9)";
-// перезаливает канвас цветом, чтобы стрелочки перерисовывались а не двоились
-    ctx.fillRect(0, 0, stage.w, stage.h);
     const back = new Image();
     back.src = _pexcanvas.toDataURL("image/png");
 
@@ -255,6 +269,8 @@ document.addEventListener('DOMContentLoaded', function() {
             bullets.push(new Bullet());
         }
 
+        // перезаливает канвас цветом, чтобы стрелочки перерисовывались а не двоились
+        ctx.clearRect(0, 0, stage.w, stage.h);
         // рисуем пули из массива bullets (пуль)
         for (let i = 0; i < bullets.length; i++) {
             bullets[i].x -= Math.sin(bullets[i].r) * BULLET_SPEED;
@@ -533,8 +549,6 @@ document.addEventListener('DOMContentLoaded', function() {
 // ------------------------------------------------------------------------ stager
 // ------------------------------------------------------------------------ stager
     function _pexresize() {
-        const cw = window.innerWidth;
-        const ch = window.innerHeight;
         if (cw <= (ch * stage.w) / stage.h) {
             portrait = true;
             scale = stage.w / cw;
@@ -551,7 +565,6 @@ document.addEventListener('DOMContentLoaded', function() {
             welcomeContainer.style.width = cw + "px";
             welcomeContainer.style.height = Math.floor((cw * stage.h) / stage.w) + "px";
 
-            const lifeAndCounter = document.getElementById('lifeAndCounter');
             lifeAndCounter.style.height = Math.floor((cw * stage.h) / stage.w) + "px";
             lifeAndCounter.style.width = cw + "px";
 
@@ -579,7 +592,6 @@ document.addEventListener('DOMContentLoaded', function() {
             welcomeContainer.style.height = ch + "px";
             welcomeContainer.style.width = Math.floor((ch * stage.w) / stage.h) + "px";
 
-            const lifeAndCounter = document.getElementById('lifeAndCounter');
             lifeAndCounter.style.height = ch + "px";
             lifeAndCounter.style.width = Math.floor((ch * stage.w) / stage.h) + "px";
 
@@ -629,7 +641,8 @@ document.addEventListener('DOMContentLoaded', function() {
         audioBg.loop = true; 
         audioBg.play();
         welcomeModal.classList.add('hidden');
-        bearSvg.classList.remove('welcome-bear')
+        bearSvg.classList.remove('welcome-bear');
+        lifeAndCounter.classList.remove("hidden");
         animated();
         audioShoot.loop = true;
         audioShoot.play();
