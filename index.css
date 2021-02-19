@@ -5,6 +5,11 @@ body {
     font-family: "Arial";
 }
 
+canvas{
+    position: relative;
+    z-index: 2;
+}
+
 #bearSvg {
     position: absolute;
     bottom: -52px;
