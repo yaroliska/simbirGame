@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="98606ec4-9d34-4075-8bae-e620074dea62" name="Default Changelist" comment="добавила цвета симбирсофт, убрала кулачки, ускорила жуков с ростом уровня, частично поменяла svg для новой истории">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/balloon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/balloon.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game-over.svg" beforeDir="false" afterPath="$PROJECT_DIR$/game-over.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="2" />
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="changeColorsAddSpeadForBugs" />
+                    <option name="lastUsedInstant" value="1613711668" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1613675516" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="simbirsoft" />
+                    <option name="lastUsedInstant" value="1613673323" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="view-fixes" />
+                    <option name="lastUsedInstant" value="1613665034" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="bugs" />
+                    <option name="lastUsedInstant" value="1613657357" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
+  <component name="ProjectId" id="1oZa8CiZy9PnIqbqFf9R3vyl8h3" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="98606ec4-9d34-4075-8bae-e620074dea62" name="Default Changelist" comment="" />
+      <created>1613496406002</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1613496406002</updated>
+      <workItem from="1613496407691" duration="1517000" />
+      <workItem from="1613498838415" duration="2743000" />
+      <workItem from="1613582848511" duration="7713000" />
+      <workItem from="1613590905545" duration="4222000" />
+      <workItem from="1613627567154" duration="14135000" />
+      <workItem from="1613642655429" duration="69000" />
+      <workItem from="1613657157877" duration="19177000" />
+    </task>
+    <task id="LOCAL-00001" summary="initial commit">
+      <created>1613496539041</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1613496539041</updated>
+    </task>
+    <task id="LOCAL-00002" summary="fix var to let/const">
+      <created>1613498539317</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1613498539317</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fix shakes">
+      <created>1613500288155</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1613500288155</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fix">
+      <created>1613593070445</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1613593070445</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fix">
+      <created>1613593442465</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1613593442465</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fix bugsContainer width">
+      <created>1613657378520</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1613657378520</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fix scale bugs">
+      <created>1613664674341</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1613664674341</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Merge branch 'bugs'&#10;&#10;Conflicts:&#10;&#9;index.js">
+      <created>1613668249176</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1613668249176</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Merge branch 'bugs'&#10;&#10;Conflicts:&#10;&#9;index.js">
+      <created>1613668573773</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1613668573773</updated>
+    </task>
+    <task id="LOCAL-00010" summary="fix bugs">
+      <created>1613672672851</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1613672672851</updated>
+    </task>
+    <task id="LOCAL-00011" summary="fix simbirsoft logo rotate">
+      <created>1613675488673</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1613675488673</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="initial commit" />
+    <MESSAGE value="fix var to let/const" />
+    <MESSAGE value="fix shakes" />
+    <MESSAGE value="fix" />
+    <MESSAGE value="fix bugsContainer width" />
+    <MESSAGE value="fix scale bugs" />
+    <MESSAGE value="Merge branch 'bugs'&#10;&#10;Conflicts:&#10;&#9;index.js" />
+    <MESSAGE value="fix bugs" />
+    <MESSAGE value="fix simbirsoft logo rotate" />
+    <MESSAGE value="добавила цвета симбирсофт, убрала кулачки, ускорила жуков с ростом уровня, частично поменяла svg для новой истории" />
+    <option name="LAST_COMMIT_MESSAGE" value="добавила цвета симбирсофт, убрала кулачки, ускорила жуков с ростом уровня, частично поменяла svg для новой истории" />
+  </component>
+</project>
