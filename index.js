@@ -144,8 +144,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const isExistBug = document.getElementById(`bugCopy_${id}`);
             const point = getCenterOfLine(fromx, fromy, tox, toy);
             if (isExistBug) {
-                isExistBug.style.left = point.x/scale;
-                isExistBug.style.top = point.y/scale;
+                isExistBug.style.left = `${point.x/scale}px`;
+                isExistBug.style.top = `${point.y/scale}px`;
                 let move;
                 if (radToDeg(angle) > 90) {
                     move = `rotate(${90 + radToDeg(angle)}deg)`;
