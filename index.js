@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Сброс надстроек и возобновление игры после проигрыша
     statisticsBtn.addEventListener("click",function(){
-        statisticsModal.classList.remove("active");
+        statisticsModal.classList.add("hidden");
         missCounter = 0;
         killCounter = 0;
         currentBugsSpeed = BUGS_SPEED;
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
             audioGameOver.play();
             isGameOver = true;
             statisticsSpan.textContent = killCounter;
-            statisticsModal.classList.add("active");
+            statisticsModal.classList.remove("hidden");
         }
     }
 
@@ -566,9 +566,6 @@ document.addEventListener('DOMContentLoaded', function() {
             welcomeContainer.style.width = cw + "px";
             welcomeContainer.style.height = Math.floor((cw * stage.h) / stage.w) + "px";
 
-            const statisticContainer = document.getElementById('statisticContainer');
-            statisticContainer.style.height = Math.floor((cw * stage.h) / stage.w) + "px";
-
             const story = document.getElementById('story');
             story.style.width = 960/scale + "px";
 
@@ -589,9 +586,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const welcomeContainer = document.getElementById('welcomeContainer');
             welcomeContainer.style.height = ch + "px";
             welcomeContainer.style.width = Math.floor((ch * stage.w) / stage.h) + "px";
-
-            const statisticContainer = document.getElementById('statisticContainer');
-            statisticContainer.style.height = ch + "px";
 
             const story = document.getElementById('story');
             story.style.width = 960/scale + "px";
