@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const audioShoot = new Audio('shoot.mp3');
     const audioBg = new Audio('sega.mp3');
     
-    const cw = window.innerWidth;
-    const ch = window.innerHeight;
+    let cw = window.innerWidth;
+    let ch = window.innerHeight;
 
     const tree = document.querySelector('.tree');
     for (let i = 0; i < 30; i++) {
@@ -548,7 +548,9 @@ document.addEventListener('DOMContentLoaded', function() {
 // ------------------------------------------------------------------------ stager
 // ------------------------------------------------------------------------ stager
 // ------------------------------------------------------------------------ stager
-    function _pexresize() {
+    function _pexresize() {    
+        cw = window.innerWidth;
+        ch = window.innerHeight;
         if (cw <= (ch * stage.w) / stage.h) {
             portrait = true;
             scale = stage.w / cw;
@@ -647,4 +649,7 @@ document.addEventListener('DOMContentLoaded', function() {
         audioShoot.loop = true;
         audioShoot.play();
     });
+    window.onresize = function(event) {
+        _pexresize();
+    };
 }, false);
