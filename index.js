@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const audioGameOver = new Audio('gameover.mp3');
     const audioMiss = new Audio('miss.mp3');
     const audioShoot = new Audio('shoot.mp3');
-    const audioKombat = new Audio('soldat.mp3');
+    const audioBg = new Audio('sega.mp3');
 
     const BULLET_SPEED = 18;
     const BUGS_SPEED = 2;
@@ -787,8 +787,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const welcomeModal = document.querySelector('.welcome');
     welcomeModal.querySelector('.welcome__slogan').addEventListener('click', function(){
-        audioKombat.loop = true; 
-        audioKombat.play();
+        audioBg.loop = true; 
+        audioBg.play();
         welcomeModal.classList.add('hidden');
         bearSvg.classList.remove('welcome-bear')
         animated();
