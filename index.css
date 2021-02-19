@@ -72,32 +72,20 @@ body {
         border-radius: 10px;
         margin: 20px 25px 20px 25px;
     }
+    .allContent{
+        padding-bottom: 1px;
+    }
 }
 
 .allContent{
-    width: 100vw;
-    height: 100vh;
     background-color: #dde2e4;
 }
 .container {
     display: flex;
     justify-content: center;
     position: relative;
-    background-color: #dde2e4;
     overflow: hidden;
-    /*height: 100vh;*/
-    /*width: 100vw; *!*/
-    background: radial-gradient(70.41% 100% at 50% 0%, #7c8e8a 0%, #25333e 100%)
-}
-
-.container::before{
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100vw;
-    height: 16px;
-    background-color: #000000;
+    background: linear-gradient(0deg, rgb(0 0 0) 16px, rgba(255,255,255,0) 20px, rgba(255,255,255,0) 100%), radial-gradient(70.41% 100% at 50% 0%, #7c8e8a 0%, #25333e 100%)
 }
 
 * {
@@ -330,9 +318,8 @@ label svg:nth-of-type(1) {
 
 .tree {
     position: absolute;
-}
-.tree-row .hidden{
-    display: block;
+    bottom: -30%; 
+    left: 0; 
 }
 .tree-row{
     position: relative;
