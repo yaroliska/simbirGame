@@ -108,37 +108,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 // ------------------------------------------------------------------------------- Gamy
-//     function drawArrow(fromx, fromy, tox, toy, lw, hlen, color) {
-//         const dx = tox - fromx;
-//         const dy = toy - fromy;
-//         const angle = Math.atan2(dy, dx);
-//         ctx.fillStyle = color;
-//         ctx.strokeStyle = color;
-//         ctx.lineCap = "round";
-//         ctx.lineWidth = lw;
-//         ctx.beginPath();
-//         ctx.moveTo(fromx, fromy);
-//         ctx.lineTo(tox, toy);
-//         ctx.stroke();
-//         ctx.beginPath();
-//         ctx.moveTo(tox, toy);
-//         ctx.lineTo(
-//             tox - hlen * Math.cos(angle - Math.PI / 6),
-//             toy - hlen * Math.sin(angle - Math.PI / 6)
-//         );
-//         ctx.lineTo(
-//             tox - (hlen * Math.cos(angle)) / 2,
-//             toy - (hlen * Math.sin(angle)) / 2
-//         );
-//         ctx.lineTo(
-//             tox - hlen * Math.cos(angle + Math.PI / 6),
-//             toy - hlen * Math.sin(angle + Math.PI / 6)
-//         );
-//         ctx.closePath();
-//         ctx.stroke();
-//         ctx.fill();
-//     }
-
     const COLORS = [
         "#1abc9c",
         "#1abc9c",
@@ -209,9 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-
     drawBag();
-
 
     function drawBullet(dx, dy, color) {
         ctx.font = "bold 25px Arial";
@@ -219,27 +186,8 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.fillText("< / >", dx, dy);
     }
 
-
-
 // очистили контекст перед началом работы
     ctx.clearRect(0, 0, stage.w, stage.h);
-
-// красные стрелки, разлетающиеся при взрыве (попадании синей в красную)
-// for (let i = 0; i < 200; i++) {
-//   const angle = Math.random() * Math.PI * 2;
-//   const length = Math.random() * 250 + 50;
-//   const myx = 360 + Math.sin(angle) * length;
-//   const myy = 360 - Math.cos(angle) * length;
-//   drawArrow(
-//     myx,
-//     myy,
-//     myx + (length / 6) * Math.sin(angle),
-//     myy - (length / 6) * Math.cos(angle),
-//     length / 30,
-//     length / 30,
-//     "#c0392b"
-//   );
-// }
 
 // сохраняет изображение (красных стрелок)
     const explode = new Image();
@@ -248,49 +196,12 @@ document.addEventListener('DOMContentLoaded', function() {
 // очищаем контекст
     ctx.clearRect(0, 0, stage.w, stage.h);
 
-// серые стрелки вокруг оружия при взрыве
-// for (let i = 0; i < 200; i++) {
-//   const angle = Math.random() * Math.PI - Math.PI / 2;
-//   const length = Math.random() * 480 + 50;
-//   const myx = stage.w / 2 + Math.sin(angle) * length;
-//   const myy = stage.h - Math.cos(angle) * length;
-//   drawArrow(
-//     myx,
-//     myy,
-//     myx + (length / 6) * Math.sin(angle),
-//     myy - (length / 6) * Math.cos(angle),
-//     length / 30,
-//     length / 30,
-//     "#2c3e50"
-//   );
-// }
-
 // сохраняет  серые стрелки в img
     const explodeb = new Image();
     explodeb.src = _pexcanvas.toDataURL("image/png");
 
 // очистили контекст
     ctx.clearRect(0, 0, stage.w, stage.h);
-
-// ctx.fillStyle = "rgba(236,240,241,1)";
-// ctx.fillRect(0, 0, stage.w, stage.h);
-
-// стрелочки на фоне
-// for (let i = 0; i < 200; i++) {
-//   const angle = ((Math.random() * Math.PI) / Math.PI) * 180;
-//   const length = Math.random() * 250 + 50;
-//   const myx = Math.random() * stage.w;
-//   const myy = Math.random() * stage.h;
-//   drawArrow(
-//     myx,
-//     myy,
-//     myx + (length / 6) * Math.sin(angle),
-//     myy - (length / 6) * Math.cos(angle),
-//     length / 30,
-//     length / 30,
-//     colors[Math.floor(Math.random() * colors.length)]
-//   );
-// }
 
     ctx.fillStyle = "rgba(236,240,241,0.9)";
 // перезаливает канвас цветом, чтобы стрелочки перерисовывались а не двоились
@@ -303,6 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let ait = 0;
     let btm = 0;
     let bullets = [];
+    let enemies = [];
 
     function Bullet() {
         this.x = stage.w / 2 - Math.sin(angle) * 150;
@@ -310,7 +222,6 @@ document.addEventListener('DOMContentLoaded', function() {
         this.r = angle;
         this.color = COLORS[Math.floor(Math.random() * 19)];
     }
-    let enemies = [];
     function Enemy() {
         this.r = (Math.random() * Math.PI) / (2.5 / 2) - Math.PI / 2.5;
         this.dis = Math.random() * stage.w + stage.h;
@@ -329,13 +240,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // взрывы
-    const explosions = [];
-    function Explosion(x, y, ty) {
-        this.x = x;
-        this.y = y;
-        this.t = 30;
-        this.ty = ty;
-    }
 
     // let eturn = 0;
     // const cold = [];
@@ -390,9 +294,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (enemies[i].y > stage.h) {
                 getMiss();
                 enemies[i] = new Enemy();
-                explosions.push(new Explosion(stage.w / 2, stage.h, 2));
-                shake = true;
-                shaket = 0;
             }
             for (let b = 0; b < bullets.length; b++) {
                 const dx = enemies[i].x - bullets[b].x;
@@ -401,7 +302,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 // точность попадания
                 if (dis < 40 * 40) {
                     getHit();
-                    explosions.push(new Explosion(enemies[i].x, enemies[i].y, 1));
                     enemies[i] = new Enemy();
                     bullets.splice(b, 1);
                 }
@@ -525,50 +425,6 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         changeKeyBoardPosition(angle);
-
-        // то из чего стреляем
-        // drawArrow(
-        //   stage.w / 2,
-        //   stage.h,
-        //   stage.w / 2 - Math.sin(angle) * 150,
-        //   stage.h - Math.cos(angle) * 150,
-        //   30,
-        //   20,
-        //   "#2c3e50"
-        // );
-
-        for (let e = 0; e < explosions.length; e++) {
-            if (+explosions[e].ty === 1) {
-                const myimg = explode;
-                ctx.globalAlpha = 1 - explosions[e].t / stage.h;
-                ctx.drawImage(
-                    myimg,
-                    explosions[e].x - explosions[e].t / 2,
-                    explosions[e].y - explosions[e].t / 2,
-                    (explosions[e].t * stage.w) / stage.h,
-                    explosions[e].t
-                );
-                ctx.globalAlpha = 1;
-            } else {
-                const myimg = explodeb;
-                ctx.globalAlpha = 1 - explosions[e].t / stage.h;
-                ctx.drawImage(
-                    myimg,
-                    explosions[e].x - (explosions[e].t * stage.w) / stage.h / 2,
-                    stage.h - explosions[e].t,
-                    (explosions[e].t * stage.w) / stage.h,
-                    explosions[e].t
-                );
-                ctx.globalAlpha = 1;
-            }
-        }
-
-        for (let e = 0; e < explosions.length; e++) {
-            explosions[e].t += 20;
-            if (explosions[e].t > stage.h) {
-                explosions.splice(e, 1);
-            }
-        }
     }
 
 // ------------------------------------------------------------------------------- events
@@ -752,29 +608,12 @@ document.addEventListener('DOMContentLoaded', function() {
     })();
 
 
-    let shake = false;
-    let shaket = 0;
     // let trax;
     // let tray;
     function animated() {
         requestAnimationFrame(animated);
-        if (shake) {
-            // trax = Math.random() * 60 - 30;
-            // tray = Math.random() * 60 - 30;
-            // ctx.translate(trax, tray);
-        }
-
         if(!isGameOver){
             enginestep();
-        }
-
-        if (shake) {
-            // ctx.translate(-trax, -tray);
-            shaket++;
-            if (shaket > 20) {
-                shaket = 0;
-                shake = false;
-            }
         }
     }
 
