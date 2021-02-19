@@ -382,6 +382,12 @@ label svg:nth-of-type(1) {
     .statistics button{
         font-size: 1rem;
     }
+    .welcome__slogan img{
+        min-width: 150px;
+    }
+    .welcome__slogan{
+        bottom: 25%;
+    }
 }
 
 @keyframes balloonshake {
